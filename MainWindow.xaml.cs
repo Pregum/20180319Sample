@@ -65,5 +65,9 @@ namespace _20180319Sample
         {
             this.foodList.Add(e.FoodInfo);
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

@@ -59,7 +59,7 @@ namespace _20180319Sample
         /// <summary>
         /// 食材画像
         /// </summary>
-        public System.Windows.Controls.Image FoodIaImage { get; set; }
+        public System.Windows.Controls.Image FoodImage { get; set; }
 
         /// <summary>
         /// 重量（ｇ）
@@ -76,10 +76,10 @@ namespace _20180319Sample
         /// </summary>
         public DateTime LimitDate { get; set; }
 
-        public Food(string name, System.Windows.Controls.Image foodIaImage, float weight, DateTime boughtDate, DateTime limitDate)
+        public Food(string name, System.Windows.Controls.Image foodImage, float weight, DateTime boughtDate, DateTime limitDate)
         {
             Name = name;
-            FoodIaImage = foodIaImage;
+            FoodImage = foodImage;
             Weight = weight;
             this.BoughtDate = boughtDate;
             this.LimitDate = limitDate;
