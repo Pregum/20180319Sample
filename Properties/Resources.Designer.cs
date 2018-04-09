@@ -61,12 +61,39 @@ namespace _20180319Sample.Properties {
         }
         
         /// <summary>
+        ///   購入日の値が不正です に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string boughtDateInvalid {
+            get {
+                return ResourceManager.GetString("boughtDateInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   期限日は購入日より後の日付を入力して下さい に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string dateRelationWrong {
+            get {
+                return ResourceManager.GetString("dateRelationWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
         internal static System.Drawing.Bitmap green_apple {
             get {
                 object obj = ResourceManager.GetObject("green_apple", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   期限日の値が不正です に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string limitDateInvalid {
+            get {
+                return ResourceManager.GetString("limitDateInvalid", resourceCulture);
             }
         }
         
@@ -87,6 +114,15 @@ namespace _20180319Sample.Properties {
             get {
                 object obj = ResourceManager.GetObject("non_alcohol", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   ここでは食材のアイコンを選択する画面を表示する予定です. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string notImplementMessage {
+            get {
+                return ResourceManager.GetString("notImplementMessage", resourceCulture);
             }
         }
         

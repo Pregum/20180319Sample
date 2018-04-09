@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:_20180319Sample"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="500">
+             d:DesignHeight="600" d:DesignWidth="500">
     <Grid>
         <Calendar x:Name="take" SelectedDatesChanged="take_SelectedDatesChanged">
             <Calendar.Background>White</Calendar.Background>
@@ -14,15 +14,15 @@
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <!--<Border Width="50" Height="50" BorderThickness="2" BorderBrush="DodgerBlue">-->
-                                <StackPanel Width="50" Height="60" Margin="2" >
-                                    <TextBlock Text="{Binding}" />
-                                    <Canvas MouseLeftButtonDown="Canvas_MouseLeftButtonDown" >
-                                        <Image x:Name="Image_Icon"  Width="10" Height="10" Source="Resources/meat.png" Stretch="Uniform"></Image>
-                                    </Canvas>
-                                    <!--<Image Source="Resources/meat.png"></Image>-->
+                                <StackPanel>
+                                    <TextBlock Text="{Binding}" FontSize="12"/>
+                                    <WrapPanel Width="50" Height="60" Margin="2">
+                                        <!--<Canvas MouseLeftButtonDown="Canvas_MouseLeftButtonDown">-->
+                                            <!--<Image x:Name="Image_Icon" Width="20" Height="20"
+                                                   Source="Resources/meat.png" Stretch="Uniform" />-->
+                                        <!--</Canvas>-->
+                                    </WrapPanel>
                                 </StackPanel>
-                                <!--</Border>-->
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>

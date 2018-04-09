@@ -5,12 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_20180319Sample"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="750">
+        Title="MainWindow" Height="650" Width="750">
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <local:UserControl1 x:Name="CalendarControl" Margin="10,10" CanvasClick="CalendarControl_OnCanvasClick"/>
-            <local:UserControl2 x:Name="InfoControl" Margin="10,10" BorderBrush="Black" BorderThickness="3"/>
+        <StackPanel>
+            <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto">
+            <MenuItem Header="編集(_E)" Click="MenuItem_OnClick"/>
+                </Menu>
+            <StackPanel Orientation="Horizontal">
+                <local:UserControl1 x:Name="CalendarControl" Margin="10" />
+                <local:UserControl2 x:Name="FoodInfomation" Margin="10" BorderBrush="Black" BorderThickness="3" />
+            </StackPanel>
         </StackPanel>
-        <!--<Frame Content="Frame" x:Name="MyFrame" HorizontalAlignment="Left" Height="414" VerticalAlignment="Top" Width="497" Margin="10,10,0,0"/>-->
     </Grid>
 </Window>
