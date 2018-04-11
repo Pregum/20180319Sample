@@ -21,9 +21,26 @@ namespace _20180319Sample
     /// </summary>
     public partial class FoodEditWindow : Window
     {
+        private Food EditFood { get; set; }
+
         public FoodEditWindow()
         {
             InitializeComponent();
+
+            BitmapImage ima = new BitmapImage(new Uri("Resources/meat.png", UriKind.Relative));
+
+            string foodName = "みーと";
+
+            DateTime boughtDate = DateTime.Today;
+
+            DateTime limitDate = DateTime.Today.AddDays(7);
+
+            this.EditFood = new Food(foodName, ima, 0, boughtDate, limitDate);
+            this.DataContext = this.EditFood;
+
+            //this.BoughtDate.SelectedDate = DateTime.Today;
+            //this.LimitDate.SelectedDate = DateTime.Today.AddDays(7);
+
         }
 
         #region UserEvent
@@ -61,8 +78,9 @@ namespace _20180319Sample
         private void OkButton_OnClick(object sender, RoutedEventArgs e)
         {
             //// ここで食材を送る処理を追加
-            string foodName = this.FoodName.Text;
-            System.Windows.Controls.Image ima = this.FoodImage;
+            //string foodName = this.FoodName.Text;
+            //BitmapImage ima = this.FoodImage.Source;
+            //ImageSource ima = this.FoodImage.Source;
             DateTime? boughtDateSelectedDate = this.BoughtDate.SelectedDate;
             DateTime boughtDate;
             if (boughtDateSelectedDate != null)
@@ -92,9 +110,11 @@ namespace _20180319Sample
                 MessageBox.Show(Properties.Resources.dateRelationWrong);
             }
 
-            var food = new Food(foodName, ima, 0, boughtDate, limitDate);
+            //BitmapImage toImage = ima.;
 
-            var args = new FoodCreatedArgs(FoodEditWindow.FoodCreatedEvent, food);
+            //var food = new Food(foodName, toImage, 0, boughtDate, limitDate);
+
+            var args = new FoodCreatedArgs(FoodEditWindow.FoodCreatedEvent, this.EditFood);
             RaiseEvent(args);
 
             //this.Dispatcher.InvokeShutdown();

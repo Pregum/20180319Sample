@@ -12,7 +12,7 @@
         <local:CalendarConverter x:Key="calendarConv" />
     </UserControl.Resources>
     <Grid>
-        <Calendar x:Name="FoodCalendar" SelectedDatesChanged="take_SelectedDatesChanged">
+        <Calendar x:Name="FoodCalendar" SelectedDatesChanged="take_SelectedDatesChanged" IsTodayHighlighted="False">
             <Calendar.Background>White</Calendar.Background>
             <Calendar.CalendarDayButtonStyle>
                 <Style TargetType="CalendarDayButton">
@@ -21,18 +21,34 @@
                             <DataTemplate>
                                 <StackPanel x:Name="dayPanel">
                                     <TextBlock Text="{Binding ElementName=dayPanel, Path=DataContext}" FontSize="12" />
-                                    <WrapPanel Width="50" Height="60" Margin="2">
+                                    <!--<WrapPanel Width="50" Height="60" Margin="2">
                                         <ContentControl>
                                             <ContentControl.ContentTemplate>
                                                 <DataTemplate DataType="{x:Type local:Food}" x:Name="tmp">
                                                     <Image Source="{Binding FoodImage}" x:Name="locaIma" />
-                                                    <DataTemplate.Triggers>
-                                                        <DataTrigger Binding="{Binding}"/>
-                                                    </DataTemplate.Triggers>
                                                 </DataTemplate>
                                             </ContentControl.ContentTemplate>
                                         </ContentControl>
-                                    </WrapPanel>
+                                    </WrapPanel>-->
+                                    <ItemsControl ItemsSource="{Binding}" x:Name="FoodItemsControl">
+                                        <ItemsControl.Template>
+                                            <ControlTemplate TargetType="ItemsControl">
+                                                <Border BorderThickness="2" BorderBrush="Black">
+                                                    <ItemsPresenter Margin="25" />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </ItemsControl.Template>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate DataType="{x:Type local:Food}">
+                                                <Image Source="{Binding Path=FoodImage}" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                 </StackPanel>
                             </DataTemplate>
                         </Setter.Value>

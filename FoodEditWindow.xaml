@@ -11,25 +11,25 @@
             <TextBlock Text="アイコン" Margin="30, 0,0,0" />
             <Canvas x:Name="FoodIcon" HorizontalAlignment="Center" Height="100" Margin="10" VerticalAlignment="Top"
                     Width="100" MouseLeftButtonDown="Icon_OnMouseLeftButtonDown">
-                <Image x:Name="FoodImage" Source="Resources/meat.png" Stretch="Uniform"
+                <Image x:Name="FoodImage" Source="{Binding Path=FoodImage}" Stretch="Uniform"
                        Height="{Binding ElementName=FoodIcon, Path=Height}" />
             </Canvas>
             <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left" Margin="30,10" TextWrapping="Wrap" Text="食材名" FontSize="15"
                            VerticalAlignment="Center" />
                 <TextBox x:Name="FoodName" VerticalAlignment="Center" HorizontalAlignment="Right" Width="150"
-                         Text="ミート"
+                         Text="{Binding Path=Name}"
                          BorderBrush="Black" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left" Margin="30,10" TextWrapping="Wrap" Text="購入日" FontSize="15"
                            VerticalAlignment="Center" />
-                <DatePicker x:Name="BoughtDate" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                <DatePicker x:Name="BoughtDate" HorizontalAlignment="Stretch" VerticalAlignment="Center" SelectedDate="{Binding Path=BoughtDate}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left" Margin="30,10" TextWrapping="Wrap" Text="期限日" FontSize="15"
                            VerticalAlignment="Center" />
-                <DatePicker x:Name="LimitDate" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                <DatePicker x:Name="LimitDate" HorizontalAlignment="Stretch" VerticalAlignment="Center" SelectedDate="{Binding Path=LimitDate}" />
             </StackPanel>
         </StackPanel>
         <StackPanel Height="50" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right"

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace _20180319Sample
 {
@@ -59,7 +60,7 @@ namespace _20180319Sample
         /// <summary>
         /// 食材画像
         /// </summary>
-        public System.Windows.Controls.Image FoodImage { get; set; }
+        public BitmapImage FoodImage { get; set; }
 
         /// <summary>
         /// 重量（ｇ）
@@ -76,7 +77,7 @@ namespace _20180319Sample
         /// </summary>
         public DateTime LimitDate { get; set; }
 
-        public Food(string name, System.Windows.Controls.Image foodImage, float weight, DateTime boughtDate, DateTime limitDate)
+        public Food(string name, BitmapImage foodImage, float weight, DateTime boughtDate, DateTime limitDate)
         {
             Name = name;
             FoodImage = foodImage;

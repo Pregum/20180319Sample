@@ -32,7 +32,7 @@ namespace _20180319Sample
 
             // test
             var list = new ObservableCollection<Food>();
-            var ima = new Image {Source = new BitmapImage(new Uri("Resources/meat.png", UriKind.Relative))};
+            var ima =  new BitmapImage(new Uri("Resources/meat.png", UriKind.Relative));
             //list.Add(new Food("みーと", ima, 10.0f, DateTime.Today, DateTime.Today.AddDays(3)));
             this.Fudo = new Food("みーと", ima, 10.0f, DateTime.Today, DateTime.Today.AddDays(3));
 
