@@ -23,9 +23,14 @@
                                     <TextBlock Text="{Binding ElementName=dayPanel, Path=DataContext}" FontSize="12" />
                                     <WrapPanel Width="50" Height="60" Margin="2">
                                         <ContentControl>
-                                            <DataTemplate DataType="{x:Type local:Food}">
-                                                <Image Source="{Binding Path=FoodImage}"/>
-                                            </DataTemplate>
+                                            <ContentControl.ContentTemplate>
+                                                <DataTemplate DataType="{x:Type local:Food}" x:Name="tmp">
+                                                    <Image Source="{Binding FoodImage}" x:Name="locaIma" />
+                                                    <DataTemplate.Triggers>
+                                                        <DataTrigger Binding="{Binding}"/>
+                                                    </DataTemplate.Triggers>
+                                                </DataTemplate>
+                                            </ContentControl.ContentTemplate>
                                         </ContentControl>
                                     </WrapPanel>
                                 </StackPanel>

@@ -41,13 +41,6 @@ namespace _20180319Sample
             // ここでFood.LimitDateと一致するカレンダーの日付のWrapPanelにFoodをバインドする
             //this.take.SelectedDate = DateTime.Now.Date;
 
-            //foreach (var aFood in list)
-            //{
-            //    this.FoodCalendar.SelectedDate = aFood.LimitDate;
-
-            //}
-
-            CalendarDayButton dayButton = new CalendarDayButton();
 
         }
 
