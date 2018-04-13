@@ -54,6 +54,14 @@ namespace _20180319Sample
             foodEditWindow.ShowDialog();
 
             MessageBox.Show("とじました");
+
+            //var hoge = Resources["conv"];
+            var hoge = (CalendarConverter)App.Current.Resources["conv"];
+            if (hoge.dict.ContainsKey(foodEditWindow.EditFood.LimitDate.Date) == false)
+            {
+                hoge.dict.Add(foodEditWindow.EditFood.LimitDate.Date,this.foodList);
+            }
+
         }
 
         /// <summary>
@@ -69,5 +77,28 @@ namespace _20180319Sample
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
         }
+
+        private void CalendarControl_CanvasClick(object sender, RoutedEventArgs e)
+        {
+             var hoge = (CalendarConverter)App.Current.Resources["conv"];
+
+            var date = this.CalendarControl.SelectedDay;
+            //hoge.dict[]
+            if (date == DateTime.Today.Day)
+            {
+                var tmp = hoge.dict[DateTime.Today];
+                this.FoodInfomation.Image_FoodIcon.Source =  tmp[0].FoodImage;
+                this.FoodInfomation.Label_FoodName.Content = tmp[0].Name;
+                this.FoodInfomation.Label_Weight.Content = tmp[0].Weight;
+            }
+            else
+            {
+                
+                //this.FoodInfomation.Image_FoodIcon.Source =  
+                this.FoodInfomation.Label_FoodName.Content = "???";
+                this.FoodInfomation.Label_Weight.Content = "???";
+            }
+        }
     }
+
 }

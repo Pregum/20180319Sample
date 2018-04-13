@@ -21,13 +21,13 @@ namespace _20180319Sample
     /// </summary>
     public partial class FoodEditWindow : Window
     {
-        private Food EditFood { get; set; }
+        public Food EditFood { get; set; }
 
         public FoodEditWindow()
         {
             InitializeComponent();
 
-            BitmapImage ima = new BitmapImage(new Uri("Resources/meat.png", UriKind.Relative));
+            BitmapImage ima = new BitmapImage(new Uri("Resources/green_apple.png", UriKind.Relative));
 
             string foodName = "みーと";
 

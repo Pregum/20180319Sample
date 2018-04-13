@@ -31,13 +31,14 @@ namespace _20180319Sample
             InitializeComponent();
 
             // test
-            var list = new ObservableCollection<Food>();
-            var ima =  new BitmapImage(new Uri("Resources/meat.png", UriKind.Relative));
-            //list.Add(new Food("みーと", ima, 10.0f, DateTime.Today, DateTime.Today.AddDays(3)));
-            this.Fudo = new Food("みーと", ima, 10.0f, DateTime.Today, DateTime.Today.AddDays(3));
+            //var list = new ObservableCollection<Food>();
+            //var ima =  new BitmapImage(new Uri("Resources/meat.png", UriKind.Relative));
+            ////list.Add(new Food("みーと", ima, 10.0f, DateTime.Today, DateTime.Today.AddDays(3)));
+            //this.Fudo = new Food("みーと", ima, 10.0f, DateTime.Today, DateTime.Today.AddDays(3));
 
+            
             //this.DataContext = list;
-            this.FoodCalendar.DataContext = Fudo;
+            //this.FoodCalendar.DataContext = Fudo;
             // ここでFood.LimitDateと一致するカレンダーの日付のWrapPanelにFoodをバインドする
             //this.take.SelectedDate = DateTime.Now.Date;
 

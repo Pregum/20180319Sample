@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:_20180319Sample"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <local:CalendarConverter x:Key="conv"/>
     </Application.Resources>
 </Application>

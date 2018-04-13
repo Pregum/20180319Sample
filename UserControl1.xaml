@@ -9,7 +9,9 @@
 
     <UserControl.Resources>
         <BitmapImage UriSource="Resources/meat.png" x:Key="meetImage" />
-        <local:CalendarConverter x:Key="calendarConv" />
+        <!--<local:CalendarConverter x:Key="calendarConv" />-->
+        <!--<local:CalendarConverter x:Key="conv"/>-->
+        <!--<local:CalendarConverter x:Key="conv"/>-->
     </UserControl.Resources>
     <Grid>
         <Calendar x:Name="FoodCalendar" SelectedDatesChanged="take_SelectedDatesChanged" IsTodayHighlighted="False">
@@ -19,33 +21,27 @@
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
+                                <!--<DataTemplate.Resources>
+                                    <local:CalendarConverter x:Key="conv"/>
+                                </DataTemplate.Resources>-->
                                 <StackPanel x:Name="dayPanel">
                                     <TextBlock Text="{Binding ElementName=dayPanel, Path=DataContext}" FontSize="12" />
-                                    <!--<WrapPanel Width="50" Height="60" Margin="2">
-                                        <ContentControl>
-                                            <ContentControl.ContentTemplate>
-                                                <DataTemplate DataType="{x:Type local:Food}" x:Name="tmp">
-                                                    <Image Source="{Binding FoodImage}" x:Name="locaIma" />
-                                                </DataTemplate>
-                                            </ContentControl.ContentTemplate>
-                                        </ContentControl>
-                                    </WrapPanel>-->
-                                    <ItemsControl ItemsSource="{Binding}" x:Name="FoodItemsControl">
+                                    <ItemsControl ItemsSource="{Binding Converter={StaticResource conv}}" x:Name="FoodItemsControl">
                                         <ItemsControl.Template>
                                             <ControlTemplate TargetType="ItemsControl">
                                                 <Border BorderThickness="2" BorderBrush="Black">
-                                                    <ItemsPresenter Margin="25" />
+                                                    <ItemsPresenter MinWidth="55" MinHeight="60" />
                                                 </Border>
                                             </ControlTemplate>
                                         </ItemsControl.Template>
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal"/>
+                                                <WrapPanel Orientation="Horizontal" />
                                             </ItemsPanelTemplate>
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate DataType="{x:Type local:Food}">
-                                                <Image Source="{Binding Path=FoodImage}" />
+                                                <Image Source="{Binding Path=FoodImage}" MaxHeight="20" Stretch="Uniform"/>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>

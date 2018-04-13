@@ -9,7 +9,7 @@
     <Grid >
         <StackPanel Margin="10">
             <Border BorderThickness="3" BorderBrush="Aqua" VerticalAlignment="Top" HorizontalAlignment="Center" Height="90">
-                <Image x:Name="Image_FoodIcon" Source="Resources/meat.png" />
+                <Image x:Name="Image_FoodIcon" Source="Resources/green_apple.png" />
             </Border>
             <TextBlock Margin="5" FontSize="18" Text="食材名"/>
             <Label x:Name="Label_FoodName" Margin="20, 10" Content="hoge"/>
