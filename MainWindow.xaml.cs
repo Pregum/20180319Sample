@@ -27,21 +27,8 @@ namespace _20180319Sample
             InitializeComponent();
         }
 
-        public IList<Food> foodList = new ObservableCollection<Food>();
+        public ObservableCollection<Food> foodList = new ObservableCollection<Food>();
 
-        //private void CalendarControl_OnCanvasClick(object sender, RoutedEventArgs e)
-        //{
-        //    FoodInfomation.Label_FoodName.Content = this.CalendarControl.SelectedDay;
-        //    FoodInfomation.Image_FoodIcon.Source = new BitmapImage(new Uri("Resources/green_apple.png", UriKind.Relative));
-        //    //FoodInfomation.Image_FoodIcon.Stretch = Stretch.Fill;
-
-        //    if (DateTime.Now.Day == this.CalendarControl.SelectedDay)
-        //    {
-        //        FoodInfomation.Label_FoodName.Content = "おーいお茶";
-        //        FoodInfomation.Image_FoodIcon.Source = new BitmapImage(new Uri("Resources/non_alcohol.png", UriKind.Relative));
-        //        FoodInfomation.Label_Weight.Content = "100";
-        //    }
-        //}
         /// <summary>
         /// 食材の追加・編集を行います
         /// </summary>

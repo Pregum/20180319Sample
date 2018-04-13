@@ -61,6 +61,7 @@
     <Compile Include="FoodEditWindow.xaml.cs">
       <DependentUpon>FoodEditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
