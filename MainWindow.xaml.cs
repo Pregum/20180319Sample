@@ -39,8 +39,9 @@ namespace _20180319Sample
             var foodEditWindow = new FoodEditWindow();
             foodEditWindow.FoodCreated += FoodEditWindow_FoodCreated;
             foodEditWindow.ShowDialog();
+            //foodEditWindow.Show();
 
-            MessageBox.Show("とじました");
+            //MessageBox.Show("とじました");
 
             //var hoge = Resources["conv"];
             var hoge = (CalendarConverter)App.Current.Resources["conv"];
@@ -70,10 +71,11 @@ namespace _20180319Sample
              var hoge = (CalendarConverter)App.Current.Resources["conv"];
 
             var date = this.CalendarControl.SelectedDay;
+            var currDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, date);
             //hoge.dict[]
-            if (date == DateTime.Today.Day)
+            if (hoge.dict.ContainsKey(currDate))
             {
-                var tmp = hoge.dict[DateTime.Today];
+                var tmp = hoge.dict[currDate];
                 this.FoodInfomation.Image_FoodIcon.Source =  tmp[0].FoodImage;
                 this.FoodInfomation.Label_FoodName.Content = tmp[0].Name;
                 this.FoodInfomation.Label_Weight.Content = tmp[0].Weight;

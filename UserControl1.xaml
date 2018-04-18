@@ -4,29 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:_20180319Sample"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="500">
 
-    <UserControl.Resources>
-        <BitmapImage UriSource="Resources/meat.png" x:Key="meetImage" />
-        <!--<local:CalendarConverter x:Key="calendarConv" />-->
-        <!--<local:CalendarConverter x:Key="conv"/>-->
-        <!--<local:CalendarConverter x:Key="conv"/>-->
-    </UserControl.Resources>
     <Grid>
         <Calendar x:Name="FoodCalendar" SelectedDatesChanged="take_SelectedDatesChanged" IsTodayHighlighted="False">
             <Calendar.Background>White</Calendar.Background>
             <Calendar.CalendarDayButtonStyle>
-                <Style TargetType="CalendarDayButton">
+                <Style x:Name="calendarDateTime" TargetType="CalendarDayButton">
                     <Setter Property="ContentTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <!--<DataTemplate.Resources>
-                                    <local:CalendarConverter x:Key="conv"/>
-                                </DataTemplate.Resources>-->
                                 <StackPanel x:Name="dayPanel">
-                                    <TextBlock Text="{Binding ElementName=dayPanel, Path=DataContext}" FontSize="12" />
-                                    <ItemsControl ItemsSource="{Binding Converter={StaticResource conv}}" x:Name="FoodItemsControl">
+                                    <!--<TextBlock Text="{Binding ElementName=dayPanel, Path=DataContext}" FontSize="12" />-->
+                                    <TextBlock Text="{Binding}" FontSize="12" />
+                                    <!--<TextBlock Text="{TemplateBinding DataContext}" FontSize="12" />-->
+                                    <!--<ItemsControl ItemsSource="{Binding Converter={StaticResource conv}}" x:Name="FoodItemsControl">-->
+                                    <ItemsControl ItemsSource="{Binding Converter={StaticResource conv}}"
+                                                  x:Name="FoodItemsControl">
                                         <ItemsControl.Template>
                                             <ControlTemplate TargetType="ItemsControl">
                                                 <Border BorderThickness="2" BorderBrush="Black">
@@ -41,7 +37,11 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate DataType="{x:Type local:Food}">
-                                                <Image Source="{Binding Path=FoodImage}" MaxHeight="20" Stretch="Uniform"/>
+                                                <!--<DataTemplate DataType="{x:Type CalendarDayButton}">-->
+                                                <Image Source="{Binding Path=FoodImage}" MaxHeight="20"
+                                                       Stretch="Uniform" />
+                                                <!--<Image
+                                                    Source="{TemplateBinding Content, Converter={StaticResource conv}}" />-->
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>

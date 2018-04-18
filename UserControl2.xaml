@@ -12,9 +12,9 @@
                 <Image x:Name="Image_FoodIcon" Source="Resources/green_apple.png" />
             </Border>
             <TextBlock Margin="5" FontSize="18" Text="食材名"/>
-            <Label x:Name="Label_FoodName" Margin="20, 10" Content="hoge"/>
+            <Label x:Name="Label_FoodName" FontSize="14" Margin="20, 10" Content="hoge"/>
             <TextBlock Margin="5" FontSize="18" Text="量（グラム）"/>
-            <Label x:Name="Label_Weight" Margin="20, 10" Content="hoge"/>
+            <Label x:Name="Label_Weight" FontSize="14" Margin="20, 10" Content="hoge"/>
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
             <Button FontSize="18" Content="前の食材" HorizontalAlignment="Right" Margin="10,0,10,0" VerticalAlignment="Bottom" Width="75" />
