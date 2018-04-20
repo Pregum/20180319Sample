@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using System.Xml;
@@ -49,7 +50,8 @@ namespace _20180319Sample
             Food fod = null;
             if (value == null)
             {
-                return fod;
+                //return fod;
+                return DependencyProperty.UnsetValue;
             }
             //if (!dict.TryGetValue(DateTime.Parse(value.ToString()), out fod))
             // Fix 今の状態だと今月だけでしか正常に動かないので、DataContextにDateTimeが入る個所を探す
@@ -57,20 +59,22 @@ namespace _20180319Sample
             var tmpDt = DateTime.Today;
             //var endDate = tmpDt.AddMonths(1).AddDays(-1);
             var endDate = new DateTime(tmpDt.Year, tmpDt.AddMonths(1).Month, 1).AddDays(-1);
-            int convertedValue = int.Parse((string)value);
-            if (endDate.Day < convertedValue)
-            {
-                return fod;
-            }
+            //int convertedValue = int.Parse((string)value);
+            //if (endDate.Day < convertedValue)
+            //{
+            //    return fod;
+            //}
 
-            DateTime currDate = new DateTime(tmpDt.Year, tmpDt.Month, convertedValue);
-            //DateTime currDate = (DateTime)value;
+            //DateTime currDate = new DateTime(tmpDt.Year, tmpDt.Month, convertedValue);
+            DateTime currDate = (DateTime)value;
             if (currDate.Year >= tmpDt.Year && this.dict.ContainsKey(currDate.Date))
             {
+                //return dict[currDate][0].FoodImage;
                 return dict[currDate];
             }
 
-            return fod;
+            //return fod;
+            return DependencyProperty.UnsetValue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -12,41 +12,26 @@
         <Calendar x:Name="FoodCalendar" SelectedDatesChanged="take_SelectedDatesChanged" IsTodayHighlighted="False">
             <Calendar.Background>White</Calendar.Background>
             <Calendar.CalendarDayButtonStyle>
-                <Style x:Name="calendarDateTime" TargetType="CalendarDayButton">
-                    <Setter Property="ContentTemplate">
+                <Style TargetType="{x:Type CalendarDayButton}">
+                    <Setter Property="Template">
                         <Setter.Value>
-                            <DataTemplate>
-                                <StackPanel x:Name="dayPanel">
-                                    <!--<TextBlock Text="{Binding ElementName=dayPanel, Path=DataContext}" FontSize="12" />-->
-                                    <TextBlock Text="{Binding}" FontSize="12" />
-                                    <!--<TextBlock Text="{TemplateBinding DataContext}" FontSize="12" />-->
-                                    <!--<ItemsControl ItemsSource="{Binding Converter={StaticResource conv}}" x:Name="FoodItemsControl">-->
-                                    <ItemsControl ItemsSource="{Binding Converter={StaticResource conv}}"
-                                                  x:Name="FoodItemsControl">
-                                        <ItemsControl.Template>
-                                            <ControlTemplate TargetType="ItemsControl">
-                                                <Border BorderThickness="2" BorderBrush="Black">
-                                                    <ItemsPresenter MinWidth="55" MinHeight="60" />
-                                                </Border>
-                                            </ControlTemplate>
-                                        </ItemsControl.Template>
+                            <ControlTemplate TargetType="{x:Type CalendarDayButton}">
+                                <StackPanel MinHeight="60" MinWidth="50">
+                                    <TextBlock Text="{Binding StringFormat={}{0:dd}}" Margin="5"/>
+                                    <ItemsControl ItemsSource="{Binding Converter={StaticResource conv}}">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal" />
+                                                <WrapPanel />
                                             </ItemsPanelTemplate>
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate DataType="{x:Type local:Food}">
-                                                <!--<DataTemplate DataType="{x:Type CalendarDayButton}">-->
-                                                <Image Source="{Binding Path=FoodImage}" MaxHeight="20"
-                                                       Stretch="Uniform" />
-                                                <!--<Image
-                                                    Source="{TemplateBinding Content, Converter={StaticResource conv}}" />-->
+                                                <Image Source="{Binding Path=FoodImage}" Height="20" Stretch="Uniform"/>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
                                 </StackPanel>
-                            </DataTemplate>
+                            </ControlTemplate>
                         </Setter.Value>
                     </Setter>
                 </Style>

@@ -47,7 +47,13 @@ namespace _20180319Sample
             var hoge = (CalendarConverter)App.Current.Resources["conv"];
             if (hoge.dict.ContainsKey(foodEditWindow.EditFood.LimitDate.Date) == false)
             {
-                hoge.dict.Add(foodEditWindow.EditFood.LimitDate.Date,this.foodList);
+                hoge.dict.Add(foodEditWindow.EditFood.LimitDate.Date, this.foodList);
+                this.foodList = new ObservableCollection<Food>();
+            }
+            else
+            {
+                hoge.dict[foodEditWindow.EditFood.LimitDate.Date].Add(this.foodList[0]);
+                this.foodList = new ObservableCollection<Food>();
             }
 
         }
@@ -68,25 +74,26 @@ namespace _20180319Sample
 
         private void CalendarControl_CanvasClick(object sender, RoutedEventArgs e)
         {
-             var hoge = (CalendarConverter)App.Current.Resources["conv"];
+            var hoge = (CalendarConverter)App.Current.Resources["conv"];
 
-            var date = this.CalendarControl.SelectedDay;
-            var currDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, date);
+            //var date = this.CalendarControl.SelectedDay;
+            //var currDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, date);
+            var currDate = this.CalendarControl.SelectedDay;
             //hoge.dict[]
             if (hoge.dict.ContainsKey(currDate))
             {
                 var tmp = hoge.dict[currDate];
-                this.FoodInfomation.Image_FoodIcon.Source =  tmp[0].FoodImage;
-                this.FoodInfomation.Label_FoodName.Content = tmp[0].Name;
-                this.FoodInfomation.Label_Weight.Content = tmp[0].Weight;
+                this.FoodInfomation.DataContext = tmp;
+                //this.FoodInfomation.Image_FoodIcon.Source =  tmp[0].FoodImage;
+                //this.FoodInfomation.Label_FoodName.Content = tmp[0].Name;
+                //this.FoodInfomation.Label_Weight.Content = tmp[0].Weight;
             }
-            else
-            {
-                
-                //this.FoodInfomation.Image_FoodIcon.Source =  
-                this.FoodInfomation.Label_FoodName.Content = "???";
-                this.FoodInfomation.Label_Weight.Content = "???";
-            }
+            //else
+            //{
+            //this.FoodInfomation.Image_FoodIcon.Source =  
+            //this.FoodInfomation.Label_FoodName.Content = "???";
+            //this.FoodInfomation.Label_Weight.Content = "???";
+            //}
         }
     }
 

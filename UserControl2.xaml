@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:_20180319Sample"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300" MaxHeight="300">
-    <Grid >
+    <Grid DataContextChanged="Grid_DataContextChanged" >
         <StackPanel Margin="10">
             <Border BorderThickness="3" BorderBrush="Aqua" VerticalAlignment="Top" HorizontalAlignment="Center" Height="90">
                 <Image x:Name="Image_FoodIcon" Source="Resources/green_apple.png" />
@@ -17,8 +17,8 @@
             <Label x:Name="Label_Weight" FontSize="14" Margin="20, 10" Content="hoge"/>
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button FontSize="18" Content="前の食材" HorizontalAlignment="Right" Margin="10,0,10,0" VerticalAlignment="Bottom" Width="75" />
-            <Button FontSize="18" Content="次の食材" HorizontalAlignment="Right" Margin="10,0,10,0" VerticalAlignment="Bottom" Width="75" />
+            <Button FontSize="18" Content="前の食材" HorizontalAlignment="Right" Margin="10,0,10,0" VerticalAlignment="Bottom" Width="75" Click="PreviousButton_Click" />
+            <Button FontSize="18" Content="次の食材" HorizontalAlignment="Right" Margin="10,0,10,0" VerticalAlignment="Bottom" Width="75" Click="NextButton_Click" />
         </StackPanel>
 
 

@@ -24,7 +24,7 @@ namespace _20180319Sample
 
         public Food Fudo = null;
 
-        public int SelectedDay { get; private set; }
+        public DateTime SelectedDay { get; private set; }
 
         public UserControl1()
         {
@@ -56,7 +56,7 @@ namespace _20180319Sample
         private void take_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             //this.SelectedDay = this.take.SelectedDate.Value.Day;
-            this.SelectedDay = ((DateTime) (e.AddedItems[0])).Day;
+            this.SelectedDay = ((DateTime) (e.AddedItems[0]));
             RaiseEvent(new CanvasEventArgs(UserControl1.CanvasClickEvent));
         }
     }
