@@ -26,7 +26,7 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate DataType="{x:Type local:Food}">
-                                                <Image Source="{Binding Path=FoodImage}" Height="20" Stretch="Uniform"/>
+                                                <Image Source="{Binding Path=FoodImage}" Height="20" Stretch="Uniform" Margin="2"/>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>

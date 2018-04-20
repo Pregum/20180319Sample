@@ -47,9 +47,10 @@ namespace _20180319Sample
                 //if (list.Count > this.CurrentIndex + 1)
                 //{
                 this.CurrentIndex = list.Count > this.CurrentIndex + 1 ? this.CurrentIndex + 1 : 0;
-                    this.Image_FoodIcon.Source = list[this.CurrentIndex].FoodImage;
-                    this.Label_FoodName.Content = list[this.CurrentIndex].Name;
-                    this.Label_Weight.Content = list[this.CurrentIndex].Weight;
+                this.Image_FoodIcon.Source = list[this.CurrentIndex].FoodImage;
+                this.Label_FoodName.Content = list[this.CurrentIndex].Name;
+                this.Label_Weight.Content = list[this.CurrentIndex].Weight;
+                this.Label_BoughtDate.Content = list[this.CurrentIndex].BoughtDate.Date;
                 //}
             }
         }
@@ -64,6 +65,7 @@ namespace _20180319Sample
                     this.Image_FoodIcon.Source = list[0].FoodImage;
                     this.Label_FoodName.Content = list[0].Name;
                     this.Label_Weight.Content = list[0].Weight;
+                    this.Label_BoughtDate.Content = list[0].BoughtDate.Date;
                 }
             }
             else
@@ -91,9 +93,10 @@ namespace _20180319Sample
                 //if (list.Count > this.CurrentIndex + 1)
                 //{
                 this.CurrentIndex = 0 <= this.CurrentIndex - 1 ? this.CurrentIndex - 1 : list.Count - 1;
-                    this.Image_FoodIcon.Source = list[this.CurrentIndex].FoodImage;
-                    this.Label_FoodName.Content = list[this.CurrentIndex].Name;
-                    this.Label_Weight.Content = list[this.CurrentIndex].Weight;
+                this.Image_FoodIcon.Source = list[this.CurrentIndex].FoodImage;
+                this.Label_FoodName.Content = list[this.CurrentIndex].Name;
+                this.Label_Weight.Content = list[this.CurrentIndex].Weight;
+                this.Label_BoughtDate.Content = list[this.CurrentIndex].BoughtDate.Date;
                 //}
             }
         }
