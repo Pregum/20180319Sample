@@ -34,7 +34,7 @@
         </StackPanel>
         <StackPanel Height="50" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right"
                     Margin="10">
-            <Button Content="決定" Click="OkButton_OnClick" Margin="5" Width="50" />
+            <Button Content="追加" Click="OkButton_OnClick" Margin="5" Width="50" />
             <Button Content="キャンセル" Click="CancelButton_OnClick" Margin="5" />
         </StackPanel>
     </Grid>
