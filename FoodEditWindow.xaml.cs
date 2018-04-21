@@ -37,7 +37,6 @@ namespace _20180319Sample
 
             //this.BoughtDate.SelectedDate = DateTime.Today;
             //this.LimitDate.SelectedDate = DateTime.Today.AddDays(7);
-
         }
 
         #region UserEvent
@@ -68,8 +67,10 @@ namespace _20180319Sample
             var window = new FoodIconSelectWindow();
             window.ShowDialog();
             var img = window.SelectedImage;
-            this.FoodImage.Source = img.Source;
-
+            if (img != null)
+            {
+                this.FoodImage.Source = img.Source;
+            }
         }
 
         /// <summary>
@@ -117,7 +118,7 @@ namespace _20180319Sample
             BitmapImage bi = new BitmapImage(new Uri(img.Source.ToString(), UriKind.Absolute));
             string foodName = this.FoodName.Text;
 
-            var food = new Food(foodName, bi , 0, boughtDate, limitDate);
+            var food = new Food(foodName, bi, 0, boughtDate, limitDate);
 
             //var args = new FoodCreatedArgs(FoodEditWindow.FoodCreatedEvent, this.EditFood);
             var args = new FoodCreatedArgs(FoodEditWindow.FoodCreatedEvent, food);
@@ -147,6 +148,5 @@ namespace _20180319Sample
         {
             this.FoodInfo = food;
         }
-
     }
 }
