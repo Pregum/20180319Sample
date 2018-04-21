@@ -71,9 +71,10 @@ namespace _20180319Sample
             else
             {
                 //// IMPLEMENT: デフォルトの画像を用意する
-                //this.Image_FoodIcon.Source = 
+                this.Image_FoodIcon.Source = new BitmapImage(new Uri("Resources/question.png", UriKind.Relative));
                 this.Label_FoodName.Content = "???";
                 this.Label_Weight.Content = "???";
+                this.Label_BoughtDate.Content = "???";
             }
 
             this.CurrentIndex = 0;

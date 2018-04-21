@@ -88,6 +88,10 @@ namespace _20180319Sample
                 //this.FoodInfomation.Label_FoodName.Content = tmp[0].Name;
                 //this.FoodInfomation.Label_Weight.Content = tmp[0].Weight;
             }
+            else
+            {
+                this.FoodInfomation.DataContext = DependencyProperty.UnsetValue;
+            }
             //else
             //{
             //this.FoodInfomation.Image_FoodIcon.Source =  

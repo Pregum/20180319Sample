@@ -28,11 +28,8 @@ namespace _20180319Sample
             InitializeComponent();
 
             BitmapImage ima = new BitmapImage(new Uri("Resources/green_apple.png", UriKind.Relative));
-
             string foodName = "みーと";
-
             DateTime boughtDate = DateTime.Today;
-
             DateTime limitDate = DateTime.Today.AddDays(7);
 
             this.EditFood = new Food(foodName, ima, 0, boughtDate, limitDate);
