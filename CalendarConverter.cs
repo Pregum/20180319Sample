@@ -47,7 +47,6 @@ namespace _20180319Sample
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Food fod = null;
             if (value == null)
             {
                 //return fod;
