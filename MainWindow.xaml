@@ -12,7 +12,7 @@
                 <MenuItem Header="編集(_E)" Click="EditMenu_OnClick" FontSize="14"/>
             </Menu>
             <StackPanel Orientation="Horizontal">
-                <local:UserControl1 x:Name="CalendarControl" Margin="10" CanvasClick="CalendarControl_DayClick"  />
+                <local:UserControl1 x:Name="CalendarControl" Margin="10" DayClick="CalendarControl_DayClick"  />
                 <local:UserControl2 x:Name="FoodInfomation" Margin="10" BorderBrush="Black" BorderThickness="3" />
             </StackPanel>
         </StackPanel>

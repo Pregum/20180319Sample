@@ -30,14 +30,16 @@ namespace _20180319Sample
             foodEditWindow.ShowDialog();
 
             var hoge = (CalendarConverter)Application.Current.Resources["conv"];
-            if (hoge.dict.ContainsKey(foodEditWindow.EditFood.LimitDate.Date) == false)
+            if (hoge.Dict.ContainsKey(foodEditWindow.EditFood.LimitDate.Date) == false)
             {
-                hoge.dict.Add(foodEditWindow.EditFood.LimitDate.Date, this.foodList);
+                hoge.Dict.Add(foodEditWindow.EditFood.LimitDate.Date, this.foodList);
                 this.foodList = new ObservableCollection<Food>();
             }
             else
             {
-                hoge.dict[foodEditWindow.EditFood.LimitDate.Date].Add(this.foodList[0]);
+                if (this.foodList.Count <= 0) return;
+
+                hoge.Dict[foodEditWindow.EditFood.LimitDate.Date].Add(this.foodList[0]);
                 this.foodList = new ObservableCollection<Food>();
             }
         }
@@ -65,14 +67,15 @@ namespace _20180319Sample
         {
             var hoge = (CalendarConverter)App.Current.Resources["conv"];
             var currDate = this.CalendarControl.SelectedDay;
-            if (hoge.dict.ContainsKey(currDate))
+            if (hoge.Dict.ContainsKey(currDate))
             {
-                var tmp = hoge.dict[currDate];
+                var tmp = hoge.Dict[currDate];
                 this.FoodInfomation.DataContext = tmp;
             }
             else
             {
-                this.FoodInfomation.DataContext = DependencyProperty.UnsetValue;
+                //this.FoodInfomation.DataContext = DependencyProperty.UnsetValue;
+                this.FoodInfomation.DataContext = null;
             }
         }
     }

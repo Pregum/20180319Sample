@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace _20180319Sample
@@ -14,50 +15,31 @@ namespace _20180319Sample
     /// </summary>
     public partial class UserControl1 : UserControl
     {
-        private Canvas _selectedCanvas = null;
-        //private DateTime _takeDisplayDate;
-
-        public Canvas SelectedCanvas
-        {
-            get { return _selectedCanvas; }
-        }
-
-        public Food Fudo = null;
-
+        /// <summary>
+        /// 選択されている日付
+        /// </summary>
         public DateTime SelectedDay { get; private set; }
 
         public UserControl1()
         {
             InitializeComponent();
-
         }
 
-        public static readonly RoutedEvent CanvasClickEvent =
-            EventManager.RegisterRoutedEvent("CanvasClick", RoutingStrategy.Tunnel, typeof(RoutedEventHandler),
+        public static readonly RoutedEvent DayClickEvent =
+            EventManager.RegisterRoutedEvent("DayClick", RoutingStrategy.Tunnel, typeof(RoutedEventHandler),
                 typeof(UserControl1));
 
-        public event RoutedEventHandler CanvasClick
+        public event RoutedEventHandler DayClick
         {
-            add => AddHandler(CanvasClickEvent, value);
-            remove => RemoveHandler(CanvasClickEvent, value);
-        }
-
-        private void Canvas_MouseLeftButtonDown(object sender, RoutedEventArgs e)
-        {
-            var canvas = sender as Canvas;
-            if (canvas != null)
-            {
-                var ima = ((Image) canvas.Children[0]);
-                BitmapImage bitmap = new BitmapImage(new Uri("Resources/green_apple.png", UriKind.Relative));
-                ima.Source = bitmap;
-            }
+            add => AddHandler(DayClickEvent, value);
+            remove => RemoveHandler(DayClickEvent, value);
         }
 
         private void take_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             //this.SelectedDay = this.take.SelectedDate.Value.Day;
             this.SelectedDay = ((DateTime) (e.AddedItems[0]));
-            RaiseEvent(new CanvasEventArgs(UserControl1.CanvasClickEvent));
+            RaiseEvent(new CanvasEventArgs(UserControl1.DayClickEvent));
         }
     }
 

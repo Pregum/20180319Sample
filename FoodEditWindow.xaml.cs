@@ -64,7 +64,12 @@ namespace _20180319Sample
         /// <param name="e"></param>
         private void Icon_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show(Properties.Resources.notImplementMessage);
+            //MessageBox.Show(Properties.Resources.notImplementMessage);
+            var window = new FoodIconSelectWindow();
+            window.ShowDialog();
+            var img = window.SelectedImage;
+            this.FoodImage.Source = img.Source;
+
         }
 
         /// <summary>
@@ -108,10 +113,14 @@ namespace _20180319Sample
             }
 
             //BitmapImage toImage = ima.;
+            System.Windows.Controls.Image img = this.FoodImage;
+            BitmapImage bi = new BitmapImage(new Uri(img.Source.ToString(), UriKind.Absolute));
+            string foodName = this.FoodName.Text;
 
-            //var food = new Food(foodName, toImage, 0, boughtDate, limitDate);
+            var food = new Food(foodName, bi , 0, boughtDate, limitDate);
 
-            var args = new FoodCreatedArgs(FoodEditWindow.FoodCreatedEvent, this.EditFood);
+            //var args = new FoodCreatedArgs(FoodEditWindow.FoodCreatedEvent, this.EditFood);
+            var args = new FoodCreatedArgs(FoodEditWindow.FoodCreatedEvent, food);
             RaiseEvent(args);
 
             //this.Dispatcher.InvokeShutdown();

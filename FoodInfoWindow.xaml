@@ -7,13 +7,10 @@
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="300" MinHeight="400">
              
-    <UserControl.Resources>
-    </UserControl.Resources>
-
     <Grid DataContextChanged="Grid_DataContextChanged" >
         <StackPanel Margin="10">
             <Border BorderThickness="3" BorderBrush="Aqua" VerticalAlignment="Top" HorizontalAlignment="Center" Height="90">
-                <Image x:Name="Image_FoodIcon" Source="Resources/green_apple.png" />
+                <Image x:Name="Image_FoodIcon" Stretch="Uniform" MinWidth="90"/>
             </Border>
             <TextBlock Margin="5" FontSize="20" Text="食材名"/>
             <Label x:Name="Label_FoodName" FontSize="18" Margin="20, 10" Content="hoge"/>

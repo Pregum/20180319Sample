@@ -76,6 +76,9 @@
     <Compile Include="FoodEditWindow.xaml.cs">
       <DependentUpon>FoodEditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FoodIconSelectWindow.xaml.cs">
+      <DependentUpon>FoodIconSelectWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="FoodCalendarWindow.xaml.cs">
       <DependentUpon>FoodCalendarWindow.xaml</DependentUpon>
@@ -84,6 +87,10 @@
       <DependentUpon>FoodInfoWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="FoodEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FoodIconSelectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,7 +156,7 @@
     <Resource Include="Resources\non_alcohol.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\orange.png" />
+    <Resource Include="Resources\orange.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -164,7 +171,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\question.png" />
+    <Resource Include="Resources\question.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

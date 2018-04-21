@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using UserControl = System.Windows.Controls.UserControl;
 
@@ -41,7 +42,7 @@ namespace _20180319Sample
 
         /// <summary>
         /// DataContextが変更された時、発生します。
-        /// nullや値が入っていない場合は発生しません。
+        /// 値が入っていない場合は発生しません。
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -59,7 +60,12 @@ namespace _20180319Sample
             }
             else
             {
-                this.Image_FoodIcon.Source = new BitmapImage(new Uri("Resources/question.png", UriKind.Relative));
+                //// FIXME: 食材が存在しない場合question.pngを表示させるようにする.
+                var hoge = new BitmapImage(new Uri("Resources/question.png", UriKind.Relative));
+                this.Image_FoodIcon.Source = hoge;
+                //this.Image_FoodIcon.SetValue(Image.SourceProperty,
+                //    new BitmapImage(new Uri("Resources/question.png", UriKind.Relative)));
+                //MessageBox.Show(this.Image_FoodIcon.GetValue(Image.SourceProperty).ToString());
                 this.Label_FoodName.Content = "???";
                 this.Label_Weight.Content = "???";
                 this.Label_BoughtDate.Content = "???";
