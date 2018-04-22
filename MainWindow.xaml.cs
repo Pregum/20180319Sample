@@ -1,19 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace _20180319Sample
 {
@@ -27,6 +13,9 @@ namespace _20180319Sample
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 食材リスト
+        /// </summary>
         public ObservableCollection<Food> foodList = new ObservableCollection<Food>();
 
         /// <summary>
@@ -34,21 +23,25 @@ namespace _20180319Sample
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        private void EditMenu_OnClick(object sender, RoutedEventArgs e)
         {
             var foodEditWindow = new FoodEditWindow();
             foodEditWindow.FoodCreated += FoodEditWindow_FoodCreated;
             foodEditWindow.ShowDialog();
 
-            MessageBox.Show("とじました");
-
-            //var hoge = Resources["conv"];
-            var hoge = (CalendarConverter)App.Current.Resources["conv"];
-            if (hoge.dict.ContainsKey(foodEditWindow.EditFood.LimitDate.Date) == false)
+            var hoge = (CalendarConverter)Application.Current.Resources["conv"];
+            if (hoge.Dict.ContainsKey(foodEditWindow.EditFood.LimitDate.Date) == false)
             {
-                hoge.dict.Add(foodEditWindow.EditFood.LimitDate.Date,this.foodList);
+                hoge.Dict.Add(foodEditWindow.EditFood.LimitDate.Date, this.foodList);
+                this.foodList = new ObservableCollection<Food>();
             }
+            else
+            {
+                if (this.foodList.Count <= 0) return;
 
+                hoge.Dict[foodEditWindow.EditFood.LimitDate.Date].Add(this.foodList[0]);
+                this.foodList = new ObservableCollection<Food>();
+            }
         }
 
         /// <summary>
@@ -65,25 +58,24 @@ namespace _20180319Sample
         {
         }
 
-        private void CalendarControl_CanvasClick(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// カレンダーの日をクリック時、選択日が賞味期限日の食材リストを取得する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CalendarControl_DayClick(object sender, RoutedEventArgs e)
         {
-             var hoge = (CalendarConverter)App.Current.Resources["conv"];
-
-            var date = this.CalendarControl.SelectedDay;
-            //hoge.dict[]
-            if (date == DateTime.Today.Day)
+            var hoge = (CalendarConverter)App.Current.Resources["conv"];
+            var currDate = this.CalendarControl.SelectedDay;
+            if (hoge.Dict.ContainsKey(currDate))
             {
-                var tmp = hoge.dict[DateTime.Today];
-                this.FoodInfomation.Image_FoodIcon.Source =  tmp[0].FoodImage;
-                this.FoodInfomation.Label_FoodName.Content = tmp[0].Name;
-                this.FoodInfomation.Label_Weight.Content = tmp[0].Weight;
+                var tmp = hoge.Dict[currDate];
+                this.FoodInfomation.DataContext = tmp;
             }
             else
             {
-                
-                //this.FoodInfomation.Image_FoodIcon.Source =  
-                this.FoodInfomation.Label_FoodName.Content = "???";
-                this.FoodInfomation.Label_Weight.Content = "???";
+                //this.FoodInfomation.DataContext = DependencyProperty.UnsetValue;
+                this.FoodInfomation.DataContext = null;
             }
         }
     }
