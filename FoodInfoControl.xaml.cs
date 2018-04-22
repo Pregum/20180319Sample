@@ -8,16 +8,16 @@ using UserControl = System.Windows.Controls.UserControl;
 namespace _20180319Sample
 {
     /// <summary>
-    /// UserControl2.xaml の相互作用ロジック
+    /// FoodInfoControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class UserControl2 : UserControl
+    public partial class FoodInfoControl : UserControl
     {
         /// <summary>
         /// 現在表示している食材インデックス
         /// </summary>
         private int CurrentIndex { get; set; }
 
-        public UserControl2()
+        public FoodInfoControl()
         {
             InitializeComponent();
         }

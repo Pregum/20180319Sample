@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_20180319Sample"
         mc:Ignorable="d"
-        Title="賞味期限カレンダー" Height="559.547" Width="669.579" Loaded="Window_Loaded">
+        Title="賞味期限カレンダー" Height="559.547" Width="700" Loaded="Window_Loaded">
     <Grid>
         <StackPanel>
             <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto">
                 <MenuItem Header="編集(_E)" Click="EditMenu_OnClick" FontSize="14"/>
             </Menu>
             <StackPanel Orientation="Horizontal">
-                <local:UserControl1 x:Name="CalendarControl" Margin="10" DayClick="CalendarControl_DayClick"  />
-                <local:UserControl2 x:Name="FoodInfomation" Margin="10" BorderBrush="Black" BorderThickness="3" />
+                <local:FoodCalendarControl x:Name="CalendarControl" Margin="10" DayClick="CalendarControl_DayClick"  />
+                <local:FoodInfoControl x:Name="FoodInfomation" Margin="10" BorderBrush="Black" BorderThickness="3" />
             </StackPanel>
         </StackPanel>
     </Grid>

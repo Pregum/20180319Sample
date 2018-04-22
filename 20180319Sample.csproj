@@ -80,11 +80,11 @@
       <DependentUpon>FoodIconSelectWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="FoodCalendarWindow.xaml.cs">
-      <DependentUpon>FoodCalendarWindow.xaml</DependentUpon>
+    <Compile Include="FoodCalendarControl.xaml.cs">
+      <DependentUpon>FoodCalendarControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FoodInfoWindow.xaml.cs">
-      <DependentUpon>FoodInfoWindow.xaml</DependentUpon>
+    <Compile Include="FoodInfoControl.xaml.cs">
+      <DependentUpon>FoodInfoControl.xaml</DependentUpon>
     </Compile>
     <Page Include="FoodEditWindow.xaml">
       <SubType>Designer</SubType>
@@ -110,11 +110,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="FoodCalendarWindow.xaml">
+    <Page Include="FoodCalendarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FoodInfoWindow.xaml">
+    <Page Include="FoodInfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
