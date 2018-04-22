@@ -72,6 +72,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CalendarConverter.cs" />
+    <Compile Include="dayOfWeekConverter.cs" />
     <Compile Include="Food.cs" />
     <Compile Include="FoodEditWindow.xaml.cs">
       <DependentUpon>FoodEditWindow.xaml</DependentUpon>

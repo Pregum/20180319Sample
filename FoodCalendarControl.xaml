@@ -7,6 +7,10 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="500">
+             
+    <UserControl.Resources>
+        <local:DayOfWeekConverter x:Key="WeekConv"/>
+    </UserControl.Resources>
 
     <Grid>
         <Calendar x:Name="FoodCalendar" SelectedDatesChanged="take_SelectedDatesChanged" IsTodayHighlighted="False">
@@ -16,10 +20,12 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type CalendarDayButton}">
-                                <Grid Background="Transparent" Margin="2">
-                                    <Border BorderThickness="2" BorderBrush="Turquoise">
+                                <!--<Grid Background="Transparent" Margin="2" >-->
+                                <Grid Background="{Binding Converter={StaticResource WeekConv}}" Margin="2" >
+                                    <!--<Border BorderThickness="2" BorderBrush="Turquoise">-->
+                                    <Border BorderThickness="2">
                                         <StackPanel MinHeight="60" MinWidth="50">
-                                            <TextBlock Text="{Binding StringFormat={}{0:dd}}" Margin="5"/>
+                                            <TextBlock x:Name="dayText" Text="{Binding StringFormat={}{0:dd}}" Margin="5" />
                                             <ItemsControl ItemsSource="{Binding Converter={StaticResource conv}}">
                                                 <ItemsControl.ItemsPanel>
                                                     <ItemsPanelTemplate>
