@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
 namespace _20180319Sample
@@ -23,9 +25,9 @@ namespace _20180319Sample
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void EditMenu_OnClick(object sender, RoutedEventArgs e)
+        private void AddMenu_OnClick(object sender, RoutedEventArgs e)
         {
-            var foodEditWindow = new FoodEditWindow();
+            var foodEditWindow = new FoodAddWindow();
             foodEditWindow.FoodCreated += FoodEditWindow_FoodCreated;
             foodEditWindow.ShowDialog();
 
@@ -77,6 +79,29 @@ namespace _20180319Sample
                 //this.FoodInfomation.DataContext = DependencyProperty.UnsetValue;
                 this.FoodInfomation.DataContext = null;
             }
+        }
+
+        /// <summary>
+        /// 編集画面の表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            //throw new NotImplementedException();
+            var selectedDate = this.CalendarControl.SelectedDay;
+            var convertDic = (CalendarConverter) App.Current.Resources["conv"];
+            if (convertDic.Dict.ContainsKey(selectedDate) && convertDic.Dict[selectedDate].Any())
+            {
+                var hoge = new FoodEditWindow();
+                hoge.DataContext = this.FoodInfomation.DataContext;
+                hoge.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("食材が表示されている日付を選択してください.");
+            }
+
         }
     }
 
