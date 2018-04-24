@@ -28,12 +28,6 @@ namespace _20180319Sample
 
         private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // implement: 選択したアイコンを別ウィンドウに渡す処理を実装する.
-            //throw new NotImplementedException();
-            if (sender is ListBoxItem lbi)
-            {
-                MessageBox.Show(lbi.Content.ToString());
-            }
         }
 
         private void EventSetter_OnHandler(object sender, MouseButtonEventArgs e)
@@ -46,19 +40,12 @@ namespace _20180319Sample
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (sender is ListBoxItem lbi)
-            //{
-            //    MessageBox.Show(lbi.Content.ToString());
-            //}
             if (sender is ListBox lb)
             {
                 if (lb.SelectedItems[0] is ListBoxItem lbi)
                 {
-                    //MessageBox.Show(img.Source.ToString());
                     if (lbi.Content is Image img)
                     {
-                        // implement: ここで選択した画像のURIをFoodEditWindowに渡す
-                        //MessageBox.Show(img.Source.ToString());
                         this.SelectedImage = img;
                         this.Close();
                     }

@@ -74,6 +74,9 @@
     <Compile Include="CalendarConverter.cs" />
     <Compile Include="dayOfWeekConverter.cs" />
     <Compile Include="Food.cs" />
+    <Compile Include="FoodAddWindow.xaml.cs">
+      <DependentUpon>FoodAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FoodEditWindow.xaml.cs">
       <DependentUpon>FoodEditWindow.xaml</DependentUpon>
     </Compile>
@@ -87,6 +90,10 @@
     <Compile Include="FoodInfoControl.xaml.cs">
       <DependentUpon>FoodInfoControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="FoodAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FoodEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -5,37 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_20180319Sample"
         mc:Ignorable="d"
-        Title="編集画面" Height="400" Width="300" ResizeMode="NoResize">
+        Title="FoodEditWindow" Height="400" Width="250" DataContextChanged="Window_DataContextChanged">
     <Grid>
-        <StackPanel>
-            <TextBlock Text="アイコン" Margin="30, 0,0,0" />
-            <Canvas x:Name="FoodIcon" HorizontalAlignment="Center" Height="100" Margin="10" VerticalAlignment="Top"
-                    Width="100" MouseLeftButtonDown="Icon_OnMouseLeftButtonDown">
-                <Image x:Name="FoodImage" Source="{Binding Path=FoodImage}" Stretch="Uniform"
-                       Height="{Binding ElementName=FoodIcon, Path=Height}" />
-            </Canvas>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock HorizontalAlignment="Left" Margin="30,10" TextWrapping="Wrap" Text="食材名" FontSize="15"
-                           VerticalAlignment="Center" />
-                <TextBox x:Name="FoodName" VerticalAlignment="Center" HorizontalAlignment="Right" Width="150"
-                         Text="{Binding Path=Name}"
-                         BorderBrush="Black" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock HorizontalAlignment="Left" Margin="30,10" TextWrapping="Wrap" Text="購入日" FontSize="15"
-                           VerticalAlignment="Center" />
-                <DatePicker x:Name="BoughtDate" HorizontalAlignment="Stretch" VerticalAlignment="Center" SelectedDate="{Binding Path=BoughtDate}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock HorizontalAlignment="Left" Margin="30,10" TextWrapping="Wrap" Text="期限日" FontSize="15"
-                           VerticalAlignment="Center" />
-                <DatePicker x:Name="LimitDate" HorizontalAlignment="Stretch" VerticalAlignment="Center" SelectedDate="{Binding Path=LimitDate}" />
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Height="50" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right"
-                    Margin="10">
-            <Button Content="追加" Click="OkButton_OnClick" Margin="5" Width="50" />
-            <Button Content="キャンセル" Click="CancelButton_OnClick" Margin="5" />
-        </StackPanel>
+        <Border BorderThickness="2" BorderBrush="Black" Margin="5">
+            <Grid>
+                <StackPanel Margin="5">
+                    <TextBlock Text="アイコン" Margin="30, 0,0,0"/>
+                    <Canvas x:Name="FoodIcon" HorizontalAlignment="Center" Height="100" Margin="10"
+                            VerticalAlignment="Top"
+                            Width="100" MouseLeftButtonDown="Icon_OnMouseLeftButtonDown">
+                        <Image x:Name="FoodImage" Source="{Binding Path=FoodImage}" Stretch="Uniform"
+                               Height="{Binding ElementName=FoodIcon, Path=Height}" />
+                    </Canvas>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="Left" Margin="10,10" TextWrapping="Wrap" Text="食材名"
+                                   FontSize="18"
+                                   VerticalAlignment="Center" />
+                        <TextBox x:Name="FoodName" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Width="120"
+                                 Text="{Binding Path=Name}"
+                                 BorderBrush="Black" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="Left" Margin="10,10" TextWrapping="Wrap" Text="購入日"
+                                   FontSize="18"
+                                   VerticalAlignment="Center" />
+                        <DatePicker x:Name="BoughtDate" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="18"
+                                    SelectedDate="{Binding Path=BoughtDate}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="Left" Margin="10,10" TextWrapping="Wrap" Text="期限日" 
+                                   FontSize="18"
+                                   VerticalAlignment="Center" />
+                        <DatePicker x:Name="LimitDate" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="18"
+                                    SelectedDate="{Binding Path=LimitDate}" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Height="40" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button FontSize="18" Content="変更" Click="OkButton_OnClick" Margin="5" Width="80"  />
+                    <Button FontSize="18" Content="キャンセル" Click="CancelButton_OnClick" Margin="5" Width="80" />
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

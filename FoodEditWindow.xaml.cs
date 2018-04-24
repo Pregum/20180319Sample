@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Image = System.Drawing.Image;
-using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace _20180319Sample
 {
@@ -21,49 +20,30 @@ namespace _20180319Sample
     /// </summary>
     public partial class FoodEditWindow : Window
     {
-        public Food EditFood { get; set; }
+        /// <summary>
+        /// 選択されている食材Index
+        /// </summary>
+        public int SelectedIndex { get; private set; }
 
-        public FoodEditWindow()
+        /// <summary>
+        /// 変更前の期限日
+        /// </summary>
+        public DateTime PrevLimitDate { get; private set; }
+
+        public FoodEditWindow(int selectedIndex)
         {
             InitializeComponent();
 
-            BitmapImage ima = new BitmapImage(new Uri("Resources/green_apple.png", UriKind.Relative));
-            string foodName = "みーと";
-            DateTime boughtDate = DateTime.Today;
-            DateTime limitDate = DateTime.Today.AddDays(7);
-
-            this.EditFood = new Food(foodName, ima, 0, boughtDate, limitDate);
-            this.DataContext = this.EditFood;
-
-            //this.BoughtDate.SelectedDate = DateTime.Today;
-            //this.LimitDate.SelectedDate = DateTime.Today.AddDays(7);
+            this.SelectedIndex = selectedIndex;
         }
-
-        #region UserEvent
-
-        public delegate void FoodCreatedEventHandler(object sender, FoodCreatedArgs e);
-
-        public static readonly RoutedEvent FoodCreatedEvent =
-            EventManager.RegisterRoutedEvent("FoodCreated", RoutingStrategy.Bubble, typeof(FoodCreatedEventHandler),
-                typeof(FoodEditWindow));
-
-        public event FoodCreatedEventHandler FoodCreated
-        {
-            add => AddHandler(FoodCreatedEvent, value);
-            remove => RemoveHandler(FoodCreatedEvent, value);
-        }
-
-        #endregion
-
 
         /// <summary>
-        /// アイコンが押されたときに発生するイベント
+        /// アイコンをクリックしたとき変更します
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Icon_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //MessageBox.Show(Properties.Resources.notImplementMessage);
             var window = new FoodIconSelectWindow();
             window.ShowDialog();
             var img = window.SelectedImage;
@@ -74,79 +54,70 @@ namespace _20180319Sample
         }
 
         /// <summary>
-        /// 決定ボタン
+        /// OKボタンクリック時のイベントです。
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OkButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //// ここで食材を送る処理を追加
-            //string foodName = this.FoodName.Text;
-            //BitmapImage ima = this.FoodImage.Source;
-            //ImageSource ima = this.FoodImage.Source;
-            DateTime? boughtDateSelectedDate = this.BoughtDate.SelectedDate;
-            DateTime boughtDate;
-            if (boughtDateSelectedDate != null)
+            var dic = (CalendarConverter) App.Current.Resources["conv"];
+
+            // 選択されている期限日が違う場合、Dictから削除し、変更後の期限日をKeyとしたコレクションに追加する
+            if (this.PrevLimitDate.Date == this.LimitDate.SelectedDate.Value)
             {
-                boughtDate = boughtDateSelectedDate.Value;
+                if (this.DataContext is Food food)
+                {
+                    dic.Dict[food.LimitDate][this.SelectedIndex] = food;
+                }
+                else
+                {
+                    throw new ArgumentException("DataContextが正しく設定されていません.");
+                }
             }
             else
             {
-                MessageBox.Show(Properties.Resources.boughtDateInvalid);
-                return;
+                if (this.DataContext is Food food)
+                {
+                    //dic.Dict[this.LimitDate.SelectedDate.Value].RemoveAt(this.SelectedIndex);
+                    dic.Dict[this.PrevLimitDate.Date].RemoveAt(this.SelectedIndex);
+
+                    // コレクションがあれば、それに追加
+                    if (dic.Dict.ContainsKey(this.LimitDate.SelectedDate.Value))
+                    {
+                        dic.Dict[this.LimitDate.SelectedDate.Value].Add(food);
+                    }
+                    else // コレクションがなければ新規追加
+                    {
+                        var foods = new ObservableCollection<Food>();
+                        foods.Add(food);
+                        dic.Dict.Add(this.LimitDate.SelectedDate.Value, foods);
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("DataContextが正しく設定されていません.");
+                }
             }
 
-            DateTime? limitDateSelectedDate = this.LimitDate.SelectedDate;
-            DateTime limitDate;
-            if (limitDateSelectedDate != null)
-            {
-                limitDate = limitDateSelectedDate.Value;
-            }
-            else
-            {
-                MessageBox.Show(Properties.Resources.limitDateInvalid);
-                return;
-            }
-
-            if (boughtDate > limitDate)
-            {
-                MessageBox.Show(Properties.Resources.dateRelationWrong);
-            }
-
-            //BitmapImage toImage = ima.;
-            System.Windows.Controls.Image img = this.FoodImage;
-            BitmapImage bi = new BitmapImage(new Uri(img.Source.ToString(), UriKind.Absolute));
-            string foodName = this.FoodName.Text;
-
-            var food = new Food(foodName, bi, 0, boughtDate, limitDate);
-
-            //var args = new FoodCreatedArgs(FoodEditWindow.FoodCreatedEvent, this.EditFood);
-            var args = new FoodCreatedArgs(FoodEditWindow.FoodCreatedEvent, food);
-            RaiseEvent(args);
-
-            //this.Dispatcher.InvokeShutdown();
             this.Close();
         }
 
-        /// <summary>
-        /// キャンセルボタン
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //this.DispatcheRoutedEventr.InvokeShutdown();
+            //throw new NotImplementedException();
             this.Close();
         }
-    }
 
-    public class FoodCreatedArgs : RoutedEventArgs
-    {
-        public Food FoodInfo { get; set; }
-
-        public FoodCreatedArgs(RoutedEvent e, Food food) : base(e)
+        private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            this.FoodInfo = food;
+            if (this.DataContext is Food food)
+            {
+                this.PrevLimitDate = food.LimitDate;
+            }
+            else
+            {
+                throw new ArgumentException("適切なDataContextが設定されていません.");
+            }
         }
     }
 }

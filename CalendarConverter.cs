@@ -44,8 +44,8 @@ namespace _20180319Sample
                     new DateTime(2018, 4, 3).AddDays(7))
             };
 
-            Dict.Add(DateTime.Today, list);
-            Dict.Add(new DateTime(2018, 4, 3), secondList);
+            Dict.Add(DateTime.Today.AddDays(7), list);
+            Dict.Add(new DateTime(2018, 4, 3).AddDays(7), secondList);
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
