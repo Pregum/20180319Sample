@@ -72,12 +72,12 @@ namespace _20180319Sample
             if (hoge.Dict.ContainsKey(currDate))
             {
                 var tmp = hoge.Dict[currDate];
-                this.FoodInfomation.DataContext = tmp;
+                this.FoodInformation.DataContext = tmp;
             }
             else
             {
-                //this.FoodInfomation.DataContext = DependencyProperty.UnsetValue;
-                this.FoodInfomation.DataContext = null;
+                //this.FoodInformation.DataContext = DependencyProperty.UnsetValue;
+                this.FoodInformation.DataContext = null;
             }
         }
 
@@ -88,13 +88,14 @@ namespace _20180319Sample
         /// <param name="e"></param>
         private void EditMenu_OnClick(object sender, RoutedEventArgs e)
         {
-            //throw new NotImplementedException();
+
             var selectedDate = this.CalendarControl.SelectedDay;
             var convertDic = (CalendarConverter) App.Current.Resources["conv"];
             if (convertDic.Dict.ContainsKey(selectedDate) && convertDic.Dict[selectedDate].Any())
             {
-                var hoge = new FoodEditWindow();
-                hoge.DataContext = this.FoodInfomation.DataContext;
+                var hoge = new FoodEditWindow(this.FoodInformation.CurrentIndex);
+                //hoge.DataContext = this.FoodInformation.DataContext;
+                hoge.DataContext = this.FoodInformation.SelectedFood;
                 hoge.ShowDialog();
             }
             else

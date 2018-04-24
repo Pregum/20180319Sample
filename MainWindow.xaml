@@ -14,7 +14,7 @@
             </Menu>
             <StackPanel Orientation="Horizontal">
                 <local:FoodCalendarControl x:Name="CalendarControl" Margin="10" DayClick="CalendarControl_DayClick"  />
-                <local:FoodInfoControl x:Name="FoodInfomation" Margin="10" BorderBrush="Black" BorderThickness="3" />
+                <local:FoodInfoControl x:Name="FoodInformation" Margin="10" BorderBrush="Black" BorderThickness="3" />
             </StackPanel>
         </StackPanel>
     </Grid>
