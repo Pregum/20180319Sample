@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -15,7 +16,16 @@ namespace _20180319Sample
         /// <summary>
         /// 現在表示している食材インデックス
         /// </summary>
-        private int CurrentIndex { get; set; }
+        public int CurrentIndex
+        {
+            get { return _currentIndex; }
+            set { _currentIndex = value; }
+        }
+
+        private int _currentIndex = 0;
+
+        public Food SelectedFood { get; private set; }
+
 
         public FoodInfoControl()
         {
@@ -30,13 +40,23 @@ namespace _20180319Sample
         /// <param name="e"></param>
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.DataContext is ObservableCollection<Food> list)
+            if (this.DataContext is ObservableCollection<Food> list && list.Any())
             {
                 this.CurrentIndex = list.Count > this.CurrentIndex + 1 ? this.CurrentIndex + 1 : 0;
                 this.Image_FoodIcon.Source = list[this.CurrentIndex].FoodImage;
                 this.Label_FoodName.Content = list[this.CurrentIndex].Name;
                 this.Label_Weight.Content = list[this.CurrentIndex].Weight;
                 this.Label_BoughtDate.Content = list[this.CurrentIndex].BoughtDate.Date;
+                this.SelectedFood = list[this.CurrentIndex];
+            }
+            else
+            {
+                var hoge = new BitmapImage(new Uri("Resources/question.png", UriKind.Relative));
+                this.Image_FoodIcon.Source = hoge;
+                this.Label_FoodName.Content = "???";
+                this.Label_Weight.Content = "???";
+                this.Label_BoughtDate.Content = "???";
+                this.SelectedFood = null;
             }
         }
 
@@ -56,16 +76,17 @@ namespace _20180319Sample
                     this.Label_FoodName.Content = list[0].Name;
                     this.Label_Weight.Content = list[0].Weight;
                     this.Label_BoughtDate.Content = list[0].BoughtDate.Date;
+                    this.SelectedFood = list[0];
                 }
             }
             else
             {
-                //// FIXME: 食材が存在しない場合question.pngを表示させるようにする.
                 var hoge = new BitmapImage(new Uri("Resources/question.png", UriKind.Relative));
                 this.Image_FoodIcon.Source = hoge;
                 this.Label_FoodName.Content = "???";
                 this.Label_Weight.Content = "???";
                 this.Label_BoughtDate.Content = "???";
+                this.SelectedFood = null;
             }
 
             this.CurrentIndex = 0;
@@ -79,13 +100,23 @@ namespace _20180319Sample
         /// <param name="e"></param>
         private void PreviousButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.DataContext is ObservableCollection<Food> list)
+            if (this.DataContext is ObservableCollection<Food> list && list.Any())
             {
                 this.CurrentIndex = 0 <= this.CurrentIndex - 1 ? this.CurrentIndex - 1 : list.Count - 1;
                 this.Image_FoodIcon.Source = list[this.CurrentIndex].FoodImage;
                 this.Label_FoodName.Content = list[this.CurrentIndex].Name;
                 this.Label_Weight.Content = list[this.CurrentIndex].Weight;
                 this.Label_BoughtDate.Content = list[this.CurrentIndex].BoughtDate.Date;
+                this.SelectedFood = list[this.CurrentIndex];
+            }
+            else
+            {
+                var hoge = new BitmapImage(new Uri("Resources/question.png", UriKind.Relative));
+                this.Image_FoodIcon.Source = hoge;
+                this.Label_FoodName.Content = "???";
+                this.Label_Weight.Content = "???";
+                this.Label_BoughtDate.Content = "???";
+                this.SelectedFood = null;
             }
         }
     }
