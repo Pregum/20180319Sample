@@ -50,6 +50,11 @@ namespace _20180319Sample
             if (img != null)
             {
                 this.FoodImage.Source = img.Source;
+                if (this.DataContext is Food food)
+                {
+                    food.FoodImage = new BitmapImage(new Uri(img.Source.ToString())) ;
+                    this.DataContext = food;
+                }
             }
         }
 
