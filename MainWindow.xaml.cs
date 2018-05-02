@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -32,16 +33,19 @@ namespace _20180319Sample
             foodAddWindow.ShowDialog();
 
             var hoge = (CalendarConverter)Application.Current.Resources["conv"];
-            if (hoge.Dict.ContainsKey(foodAddWindow.EditFood.LimitDate.Date) == false)
+            //if (hoge.Dict.ContainsKey(foodAddWindow.EditFood.LimitDate.Date) == false)
+            if(hoge.ObserveTable.Contains(foodAddWindow.EditFood.LimitDate.Date) == false)
             {
-                hoge.Dict.Add(foodAddWindow.EditFood.LimitDate.Date, this.foodList);
+                //hoge.Dict.Add(foodAddWindow.EditFood.LimitDate.Date, this.foodList);
+                hoge.ObserveTable.Add(new KeyValuePair<DateTime, ObservableCollection<Food>>(foodAddWindow.EditFood.LimitDate.Date, this.foodList));
                 this.foodList = new ObservableCollection<Food>();
             }
             else
             {
                 if (this.foodList.Count <= 0) return;
 
-                hoge.Dict[foodAddWindow.EditFood.LimitDate.Date].Add(this.foodList[0]);
+                //hoge.Dict[foodAddWindow.EditFood.LimitDate.Date].Add(this.foodList[0]);
+                hoge.ObserveTable[foodAddWindow.EditFood.LimitDate.Date].Value.Add(this.foodList[0]);
                 this.foodList = new ObservableCollection<Food>();
             }
         }
@@ -67,11 +71,13 @@ namespace _20180319Sample
         /// <param name="e"></param>
         private void CalendarControl_DayClick(object sender, RoutedEventArgs e)
         {
-            var hoge = (CalendarConverter)App.Current.Resources["conv"];
+            var hoge = (CalendarConverter)Application.Current.Resources["conv"];
             var currDate = this.CalendarControl.SelectedDay;
-            if (hoge.Dict.ContainsKey(currDate))
+            //if (hoge.Dict.ContainsKey(currDate))
+            if(hoge.ObserveTable.Contains(currDate))
             {
-                var tmp = hoge.Dict[currDate];
+                //var tmp = hoge.Dict[currDate];
+                var tmp = hoge.ObserveTable[currDate].Value;
                 this.FoodInformation.DataContext = tmp;
             }
             else
@@ -90,8 +96,9 @@ namespace _20180319Sample
         {
 
             var selectedDate = this.CalendarControl.SelectedDay;
-            var convertDic = (CalendarConverter) App.Current.Resources["conv"];
-            if (convertDic.Dict.ContainsKey(selectedDate) && convertDic.Dict[selectedDate].Any())
+            var convertDic = (CalendarConverter) Application.Current.Resources["conv"];
+            //if (convertDic.Dict.ContainsKey(selectedDate) && convertDic.Dict[selectedDate].Any())
+            if (convertDic.ObserveTable.Contains(selectedDate) && convertDic.ObserveTable[selectedDate].Value.Any())
             {
                 var hoge = new FoodEditWindow(this.FoodInformation.CurrentIndex);
                 //hoge.DataContext = this.FoodInformation.DataContext;
