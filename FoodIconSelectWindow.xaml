@@ -7,18 +7,19 @@
         mc:Ignorable="d"
         Title="FoodIconSelectWindow" Height="300" Width="300">
     <Grid>
-        <ListBox VerticalAlignment="Top" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown" SelectionChanged="ListBox_SelectionChanged">
+        <ListBox x:Name="ListBox" VerticalAlignment="Top" SelectionChanged="ListBox_SelectionChanged">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
+                    <!--<StackPanel Orientation="Horizontal" />-->
+                    <WrapPanel Orientation="Horizontal" Width="250"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
-            <ListBox.ItemContainerStyle>
+            <!--<ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <EventSetter Event="MouseLeftButtonDown" Handler="EventSetter_OnHandler" />
                 </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBoxItem>
+            </ListBox.ItemContainerStyle>-->
+            <!--<ListBoxItem>
                 <Image Source="Resources/green_apple.png" Height="30" Stretch="Uniform" />
             </ListBoxItem>
             <ListBoxItem>
@@ -29,7 +30,7 @@
             </ListBoxItem>
             <ListBoxItem>
                 <Image Source="Resources/orange.png" Height="30" Stretch="Uniform" />
-            </ListBoxItem>
+            </ListBoxItem>-->
 
         </ListBox>
     </Grid>

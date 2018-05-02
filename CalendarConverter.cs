@@ -14,18 +14,27 @@ using _20180319Sample.Annotations;
 namespace _20180319Sample
 {
     [ValueConversion(typeof(DateTime), typeof(IList<Food>))]
-    public class CalendarConverter : IValueConverter
+    public class CalendarConverter : IValueConverter, INotifyPropertyChanged
     {
         /// <summary>
         /// key : 日付、value : 食材リストのディクショナリ
         /// </summary>
-        public Dictionary<DateTime, ObservableCollection<Food>> __dict =
+        private Dictionary<DateTime, ObservableCollection<Food>> _dict =
             new Dictionary<DateTime, ObservableCollection<Food>>();
 
         /// <summary>
         /// key : 日付、value : 食材リストのディクショナリ
         /// </summary>
-        public Dictionary<DateTime, ObservableCollection<Food>> Dict => __dict;
+        //public Dictionary<DateTime, ObservableCollection<Food>> Dict => __dict;
+        public Dictionary<DateTime, ObservableCollection<Food>> Dict
+        {
+            get { return _dict; }
+            set
+            {
+                _dict = value;
+                OnPropertyChanged(nameof(Dict));
+            }
+        }
 
         public CalendarConverter()
         {
@@ -66,6 +75,14 @@ namespace _20180319Sample
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

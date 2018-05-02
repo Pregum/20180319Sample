@@ -52,8 +52,11 @@ namespace _20180319Sample
                 this.FoodImage.Source = img.Source;
                 if (this.DataContext is Food food)
                 {
-                    food.FoodImage = new BitmapImage(new Uri(img.Source.ToString())) ;
-                    this.DataContext = food;
+                    var newFood = new Food(food.Name, food.FoodImage, food.Weight, food.BoughtDate, food.LimitDate);
+                    //food.FoodImage = new BitmapImage(new Uri(img.Source.ToString())) ;
+                    newFood.FoodImage = new BitmapImage(new Uri(img.Source.ToString()));
+                    //this.DataContext = food;
+                    this.DataContext = newFood;
                 }
             }
         }
@@ -65,10 +68,11 @@ namespace _20180319Sample
         /// <param name="e"></param>
         private void OkButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var dic = (CalendarConverter) App.Current.Resources["conv"];
+            var dic = (CalendarConverter) Application.Current.Resources["conv"];
 
             // 選択されている期限日が違う場合、Dictから削除し、変更後の期限日をKeyとしたコレクションに追加する
-            if (this.PrevLimitDate.Date == this.LimitDate.SelectedDate.Value)
+            var limitDateSelectedDate = this.LimitDate.SelectedDate;
+            if (limitDateSelectedDate != null && this.PrevLimitDate.Date == limitDateSelectedDate.Value)
             {
                 if (this.DataContext is Food food)
                 {
@@ -87,15 +91,17 @@ namespace _20180319Sample
                     dic.Dict[this.PrevLimitDate.Date].RemoveAt(this.SelectedIndex);
 
                     // コレクションがあれば、それに追加
-                    if (dic.Dict.ContainsKey(this.LimitDate.SelectedDate.Value))
+                    var dateSelectedDate = this.LimitDate.SelectedDate;
+                    if (dateSelectedDate != null && dic.Dict.ContainsKey(dateSelectedDate.Value))
                     {
-                        dic.Dict[this.LimitDate.SelectedDate.Value].Add(food);
+                        var selectedDate = this.LimitDate.SelectedDate;
+                        if (selectedDate != null) dic.Dict[selectedDate.Value].Add(food);
                     }
                     else // コレクションがなければ新規追加
                     {
-                        var foods = new ObservableCollection<Food>();
-                        foods.Add(food);
-                        dic.Dict.Add(this.LimitDate.SelectedDate.Value, foods);
+                        var foods = new ObservableCollection<Food> {food};
+                        var selectedDate = this.LimitDate.SelectedDate;
+                        if (selectedDate != null) dic.Dict.Add(selectedDate.Value, foods);
                     }
                 }
                 else
