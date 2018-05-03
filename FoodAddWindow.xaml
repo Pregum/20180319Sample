@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_20180319Sample"
         mc:Ignorable="d"
-        Title="編集画面" Height="400" Width="300" ResizeMode="NoResize">
+        Title="追加画面" Height="400" Width="300" ResizeMode="NoResize">
     <Grid>
         <StackPanel>
             <TextBlock Text="アイコン" Margin="30, 0,0,0" />

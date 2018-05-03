@@ -77,7 +77,8 @@ namespace _20180319Sample
                 if (this.DataContext is Food food)
                 {
                     //dic.Dict[food.LimitDate][this.SelectedIndex] = food;
-                    dic.ObserveTable[food.LimitDate].Value[this.SelectedIndex] = food;
+                    //dic.ObserveTable[food.LimitDate].Value[this.SelectedIndex] = food;
+                    dic.ObserveTable[food.LimitDate][this.SelectedIndex] = food;
                 }
                 else
                 {
@@ -90,7 +91,8 @@ namespace _20180319Sample
                 {
                     //dic.Dict[this.LimitDate.SelectedDate.Value].RemoveAt(this.SelectedIndex);
                     //dic.Dict[this.PrevLimitDate.Date].RemoveAt(this.SelectedIndex);
-                    dic.ObserveTable[this.PrevLimitDate.Date].Value.RemoveAt(this.SelectedIndex);
+                    //dic.ObserveTable[this.PrevLimitDate.Date].Value.RemoveAt(this.SelectedIndex);
+                    dic.ObserveTable[this.PrevLimitDate].RemoveAt(this.SelectedIndex);
 
                     // コレクションがあれば、それに追加
                     var dateSelectedDate = this.LimitDate.SelectedDate;
@@ -101,7 +103,8 @@ namespace _20180319Sample
                         //if (selectedDate != null) dic.Dict[selectedDate.Value].Add(food);
                         if (selectedDate != null)
                         {
-                            dic.ObserveTable[selectedDate.Value].Value.Add(food);
+                            //dic.ObserveTable[selectedDate.Value].Value.Add(food);
+                            dic.ObserveTable[selectedDate.Value].Add(food);
                         }
                     }
                     else // コレクションがなければ新規追加

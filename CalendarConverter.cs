@@ -8,14 +8,15 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using System.Xml;
 using _20180319Sample.Annotations;
 
 namespace _20180319Sample
 {
     [ValueConversion(typeof(DateTime), typeof(IList<Food>))]
-    //public class CalendarConverter : IValueConverter, INotifyPropertyChanged
-    public class CalendarConverter : IValueConverter
+    public class CalendarConverter : IValueConverter, INotifyPropertyChanged
+    //public class CalendarConverter : IValueConverter
     {
         /// <summary>
         /// key : 日付、value : 食材リストのディクショナリ
@@ -42,7 +43,11 @@ namespace _20180319Sample
         public ObservableDictionary<DateTime, ObservableCollection<Food>> ObserveTable
         {
             get { return _observeTable; }
-            set { _observeTable = value; }
+            set
+            {
+                _observeTable = value;
+                OnPropertyChanged(nameof(ObserveTable));
+            }
         }
 
 
@@ -86,7 +91,8 @@ namespace _20180319Sample
 
                 if (this.ObserveTable.Contains(currDate.Date))
                 {
-                    return ObserveTable[currDate].Value;
+                    //return ObserveTable[currDate].Value;
+                    return ObserveTable[currDate];
                 }
             }
 
@@ -94,17 +100,18 @@ namespace _20180319Sample
             return DependencyProperty.UnsetValue;
         }
 
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
 
-        //public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        //[NotifyPropertyChangedInvocator]
-        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //}
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
