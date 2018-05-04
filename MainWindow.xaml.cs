@@ -148,6 +148,7 @@ namespace _20180319Sample
 
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
+            BarcodeCapture.Capture();
         }
     }
 
