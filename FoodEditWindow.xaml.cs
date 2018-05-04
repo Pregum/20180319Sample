@@ -52,9 +52,11 @@ namespace _20180319Sample
                 this.FoodImage.Source = img.Source;
                 if (this.DataContext is Food food)
                 {
-                    var newFood = new Food(food.Name, food.FoodImage, food.Weight, food.BoughtDate, food.LimitDate);
+                    var newFood = new Food(food.Name, food.FoodImage, food.Weight, food.BoughtDate, food.LimitDate)
+                    {
+                        FoodImage = new BitmapImage(new Uri(img.Source.ToString()))
+                    };
                     //food.FoodImage = new BitmapImage(new Uri(img.Source.ToString())) ;
-                    newFood.FoodImage = new BitmapImage(new Uri(img.Source.ToString()));
                     //this.DataContext = food;
                     this.DataContext = newFood;
                 }
@@ -127,6 +129,7 @@ namespace _20180319Sample
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
             //throw new NotImplementedException();
+
             this.Close();
         }
 

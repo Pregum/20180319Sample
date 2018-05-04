@@ -135,6 +135,9 @@ namespace _20180319Sample
                 //hoge.DataContext = this.FoodInformation.DataContext;
                 hoge.DataContext = this.FoodInformation.SelectedFood;
                 hoge.ShowDialog();
+                this.FoodInformation.DataContext = null;
+                this.FoodInformation.DataContext =
+                    convertDic.ObserveTable[selectedDate];
             }
             else
             {
