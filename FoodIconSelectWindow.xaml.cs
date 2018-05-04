@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,10 +8,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Path = System.IO.Path;
 
 namespace _20180319Sample
 {
@@ -24,17 +25,24 @@ namespace _20180319Sample
         public FoodIconSelectWindow()
         {
             InitializeComponent();
+
+            Init();
         }
 
-        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Init()
         {
-        }
-
-        private void EventSetter_OnHandler(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is ListBoxItem lbi)
+            foreach (var file in Directory.EnumerateFiles(@"..\..\Resources\"))
             {
-                MessageBox.Show(lbi.Content.ToString());
+                //MessageBox.Show(file);
+                var listBoxItem = new ListBoxItem();
+                var ima = new System.Windows.Controls.Image
+                {
+                    Source = new BitmapImage(new Uri(Path.GetFullPath(file), UriKind.Absolute)),
+                    Height = 50,
+                    Stretch = Stretch.Uniform
+                };
+                listBoxItem.Content = ima;
+                this.ListBox.Items.Add(listBoxItem);
             }
         }
 

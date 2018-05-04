@@ -8,24 +8,48 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using System.Xml;
 using _20180319Sample.Annotations;
 
 namespace _20180319Sample
 {
     [ValueConversion(typeof(DateTime), typeof(IList<Food>))]
-    public class CalendarConverter : IValueConverter
+    public class CalendarConverter : IValueConverter, INotifyPropertyChanged
+    //public class CalendarConverter : IValueConverter
     {
         /// <summary>
         /// key : 日付、value : 食材リストのディクショナリ
         /// </summary>
-        public Dictionary<DateTime, ObservableCollection<Food>> __dict =
+        private Dictionary<DateTime, ObservableCollection<Food>> _dict =
             new Dictionary<DateTime, ObservableCollection<Food>>();
 
         /// <summary>
         /// key : 日付、value : 食材リストのディクショナリ
         /// </summary>
-        public Dictionary<DateTime, ObservableCollection<Food>> Dict => __dict;
+        public Dictionary<DateTime, ObservableCollection<Food>> Dict
+        {
+            get { return _dict; }
+            set
+            {
+                _dict = value;
+                //OnPropertyChanged(nameof(Dict));
+            }
+        }
+
+        private ObservableDictionary<DateTime, ObservableCollection<Food>> _observeTable =
+            new ObservableDictionary<DateTime, ObservableCollection<Food>>();
+
+        public ObservableDictionary<DateTime, ObservableCollection<Food>> ObserveTable
+        {
+            get { return _observeTable; }
+            set
+            {
+                _observeTable = value;
+                OnPropertyChanged(nameof(ObserveTable));
+            }
+        }
+
 
         public CalendarConverter()
         {
@@ -44,8 +68,15 @@ namespace _20180319Sample
                     new DateTime(2018, 4, 3).AddDays(7))
             };
 
-            Dict.Add(DateTime.Today.AddDays(7), list);
-            Dict.Add(new DateTime(2018, 4, 3).AddDays(7), secondList);
+            //Dict.Add(DateTime.Today.AddDays(7), list);
+            //Dict.Add(new DateTime(2018, 4, 3).AddDays(7), secondList);
+
+            this.ObserveTable.Add(
+                new KeyValuePair<DateTime, ObservableCollection<Food>>(DateTime.Today.AddDays(7), list));
+            //Dict.Add(new DateTime(2018, 4, 3).AddDays(7), secondList);
+            this.ObserveTable.Add(
+                new KeyValuePair<DateTime, ObservableCollection<Food>>(new DateTime(2018, 4, 3).AddDays(7),
+                    secondList));
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -53,9 +84,15 @@ namespace _20180319Sample
             //// DateTimeに変換可能ならcurrDateに変換
             if (value is DateTime currDate)
             {
-                if (this.Dict.ContainsKey(currDate.Date))
+                //if (this.Dict.ContainsKey(currDate.Date))
+                //{
+                //    return Dict[currDate];
+                //}
+
+                if (this.ObserveTable.Contains(currDate.Date))
                 {
-                    return Dict[currDate];
+                    //return ObserveTable[currDate].Value;
+                    return ObserveTable[currDate];
                 }
             }
 
@@ -63,9 +100,18 @@ namespace _20180319Sample
             return DependencyProperty.UnsetValue;
         }
 
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

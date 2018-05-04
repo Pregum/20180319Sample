@@ -72,6 +72,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CalendarConverter.cs" />
+    <Compile Include="CollectionBasedDictionary.cs" />
     <Compile Include="dayOfWeekConverter.cs" />
     <Compile Include="Food.cs" />
     <Compile Include="FoodAddWindow.xaml.cs">
@@ -180,6 +181,156 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\036-cake.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\037-cherries.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\038-raspberry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\039-steak.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\040-strawberry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\041-orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\042-grapes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\043-fish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\044-watermelon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\045-broccoli.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\046-salad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\047-pint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\048-carrot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\049-tomato.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\050-fruit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\001-food-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\002-fruit-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\003-food-14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\004-fruit-4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\005-food-13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\006-food-12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\007-drink-4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\008-cup-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\009-drink-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\010-drink-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\011-food-11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\012-food-10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\013-food-9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\014-food-8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\015-food-7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\016-food-6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\017-fruit-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\018-food-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\019-food-4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\020-drink-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\021-food-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\022-fruit-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\023-fruit-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\024-cup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\025-food-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\026-food-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\027-drink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\028-food.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\029-chili.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\030-sandwich-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\031-glass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\032-sandwich.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\033-pizza.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\034-pineapple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\035-lemon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

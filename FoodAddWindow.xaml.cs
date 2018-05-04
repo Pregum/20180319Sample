@@ -44,7 +44,8 @@ namespace _20180319Sample
         public delegate void FoodCreatedEventHandler(object sender, FoodCreatedArgs e);
 
         public static readonly RoutedEvent FoodCreatedEvent =
-            EventManager.RegisterRoutedEvent("FoodCreated", RoutingStrategy.Bubble, typeof(FoodCreatedEventHandler),
+            //EventManager.RegisterRoutedEvent("FoodCreated", RoutingStrategy.Bubble, typeof(FoodCreatedEventHandler),
+            EventManager.RegisterRoutedEvent(nameof(FoodCreated), RoutingStrategy.Bubble, typeof(FoodCreatedEventHandler),
                 typeof(FoodAddWindow));
 
         public event FoodCreatedEventHandler FoodCreated

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_20180319Sample"
         mc:Ignorable="d"
-        Title="FoodEditWindow" Height="400" Width="250" DataContextChanged="Window_DataContextChanged">
+        Title="編集画面" Height="400" Width="250" DataContextChanged="Window_DataContextChanged">
     <Grid>
         <Border BorderThickness="2" BorderBrush="Black" Margin="5">
             <Grid>
