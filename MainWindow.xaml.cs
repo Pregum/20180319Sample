@@ -35,13 +35,8 @@ namespace _20180319Sample
             foodAddWindow.ShowDialog();
 
             var hoge = (CalendarConverter)Application.Current.Resources["conv"];
-            //if (hoge.Dict.ContainsKey(foodAddWindow.EditFood.LimitDate.Date) == false)
             if (hoge.ObserveTable.Contains(foodAddWindow.EditFood.LimitDate.Date) == false)
             {
-                //hoge.Dict.Add(foodAddWindow.EditFood.LimitDate.Date, this.foodList);
-                //hoge.ObserveTable.Add(new KeyValuePair<DateTime, ObservableCollection<Food>>(foodAddWindow.EditFood.LimitDate.Date, this.foodList));
-                //hoge.ObserveTable.AddItems(new KeyValuePair<DateTime, ObservableCollection<Food>>(foodAddWindow.EditFood.LimitDate.Date, this.foodList));
-                //hoge.ObserveTable.Add(new KeyValuePair<DateTime, ObservableCollection<Food>>(foodAddWindow.EditFood.LimitDate.Date, new ObservableCollection<Food>(this._foodList)));
                 hoge.ObserveTable.Add(foodAddWindow.EditFood.LimitDate.Date, this._foodList);
                 this._foodList = new ObservableCollection<Food>();
 
@@ -59,9 +54,6 @@ namespace _20180319Sample
             {
                 if (this._foodList.Count <= 0) return;
 
-                //hoge.Dict[foodAddWindow.EditFood.LimitDate.Date].Add(this.foodList[0]);
-                //hoge.ObserveTable[foodAddWindow.EditFood.LimitDate.Date].Value.Add(this._foodList[0]);
-                //hoge.ObserveTable[foodAddWindow.EditFood.LimitDate.Date].Add(this._foodList[0]);
                 hoge.ObserveTable[foodAddWindow.EditFood.LimitDate.Date].Add(this._foodList[0]);
                 this._foodList = new ObservableCollection<Food>();
             }
@@ -131,9 +123,11 @@ namespace _20180319Sample
             //if (convertDic.ObserveTable.Contains(selectedDate) && convertDic.ObserveTable[selectedDate].Value.Any())
             if (convertDic.ObserveTable.Contains(selectedDate) && convertDic.ObserveTable[selectedDate].Any())
             {
-                var hoge = new FoodEditWindow(this.FoodInformation.CurrentIndex);
+                var hoge = new FoodEditWindow(this.FoodInformation.CurrentIndex)
+                {
+                    DataContext = this.FoodInformation.SelectedFood
+                };
                 //hoge.DataContext = this.FoodInformation.DataContext;
-                hoge.DataContext = this.FoodInformation.SelectedFood;
                 hoge.ShowDialog();
                 this.FoodInformation.DataContext = null;
                 this.FoodInformation.DataContext =
@@ -149,6 +143,36 @@ namespace _20180319Sample
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             BarcodeCapture.Capture();
+            if (BarcodeCapture.DoneDecode)
+            {
+                var foodAddWindow = new FoodAddWindow(BarcodeCapture.FoodName);
+                foodAddWindow.FoodCreated += FoodEditWindow_FoodCreated;
+                foodAddWindow.ShowDialog();
+
+                var hoge = (CalendarConverter)Application.Current.Resources["conv"];
+                if (hoge.ObserveTable.Contains(foodAddWindow.EditFood.LimitDate.Date) == false)
+                {
+                    hoge.ObserveTable.Add(foodAddWindow.EditFood.LimitDate.Date, this._foodList);
+                    this._foodList = new ObservableCollection<Food>();
+
+                    // HACK: 即時プロパティ変更の方法がわからなかったため、表示を変更させイベントが発生するように設定
+                    var date = this.CalendarControl.FoodCalendar.DisplayDate;
+                    var selectedDate = this.CalendarControl.FoodCalendar.SelectedDate;
+                    this.CalendarControl.FoodCalendar.DisplayDate = date.AddMonths(1);
+                    if (selectedDate.HasValue)
+                    {
+                        this.CalendarControl.FoodCalendar.SelectedDate = selectedDate;
+                    }
+                    this.CalendarControl.FoodCalendar.DisplayDate = date;
+                }
+                else
+                {
+                    if (this._foodList.Count <= 0) return;
+
+                    hoge.ObserveTable[foodAddWindow.EditFood.LimitDate.Date].Add(this._foodList[0]);
+                    this._foodList = new ObservableCollection<Food>();
+                }
+            }
         }
     }
 

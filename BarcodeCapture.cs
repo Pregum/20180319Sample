@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -10,22 +11,30 @@ using Newtonsoft.Json.Linq;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 using ZXing;
+using ZXing.Common;
 using static OpenCvSharp.OpenCvSharpException;
 using Rect = OpenCvSharp.Rect;
 using Window = OpenCvSharp.Window;
 
 namespace _20180319Sample
 {
-    public class BarcodeCapture
+    public static class BarcodeCapture
     {
-        private static System.Timers.Timer _timer = new System.Timers.Timer() {Interval = 1000};
+        private static readonly System.Timers.Timer Timer = new System.Timers.Timer() {Interval = 500};
+
         private static Mat _mat = new Mat();
         //private static string savePath = "capImage.png";
 
+        public static string FoodName = "no item.";
+        public static bool DoneDecode = false;
+
         public static void Capture()
         {
-            _timer.Elapsed += TimerOnElapsed;
-            _timer.Start();
+            FoodName = "no item.";
+            DoneDecode = false;
+
+            Timer.Elapsed += TimerOnElapsed;
+            Timer.Start();
             using (var capture = new VideoCapture(0) {AutoFocus = true})
             {
                 using (var window = new Window("capture"))
@@ -40,23 +49,41 @@ namespace _20180319Sample
                         {
                             break;
                         }
+
+                        // decode done.
+                        if (DoneDecode)
+                        {
+                            break;
+                        }
                     }
                 }
             }
-            _timer.Stop();
+
+            Timer.Stop();
 
             Cv2.DestroyWindow("capture");
         }
 
         private static void TimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
         {
+            Timer.Stop();
             if (_mat == null)
             {
+                Timer.Start();
                 return;
             }
-            var reader = new BarcodeReader(){AutoRotate = true};
 
-            using (var tmp = new Mat(_mat, new Rect(0,0, _mat.Width, _mat.Height)))
+            var reader = new BarcodeReader()
+            {
+                AutoRotate = true,
+                Options = new ZXing.Common.DecodingOptions()
+                {
+                    TryHarder = true,
+                    PossibleFormats = new List<BarcodeFormat>() { BarcodeFormat.EAN_13},
+                },
+            };
+
+            using (var tmp = new Mat(_mat, new Rect(0, 0, _mat.Width, _mat.Height)))
             {
                 // 参考URL : http://www.moonmile.net/blog/archives/6258
                 System.Drawing.Bitmap bitmap = _mat.ToBitmap();
@@ -66,9 +93,21 @@ namespace _20180319Sample
                     var foodJson = ToFoodName(long.Parse(result.Text));
                     JObject jobj = JObject.Parse(foodJson);
                     var jarr = jobj.First.Last.Last.First.First.First["0"]["Name"];
-                    MessageBox.Show(jarr?.ToString() ?? "No item.");
+                    //MessageBox.Show(jarr?.ToString() ?? "No item.");
+                    // FoodAddWindow open 
+                    if (jarr != null)
+                    {
+                        DoneDecode = true;
+                        FoodName = jarr.ToString();
+                    }
+                    else
+                    {
+                        DoneDecode = false;
+                    }
                 }
             }
+
+            Timer.Start();
         }
 
         private static string ToFoodName(long janCode)

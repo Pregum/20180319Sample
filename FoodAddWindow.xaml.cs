@@ -39,11 +39,17 @@ namespace _20180319Sample
             //this.LimitDate.SelectedDate = DateTime.Today.AddDays(7);
         }
 
+        public FoodAddWindow(string foodName = "みーと") : this()
+        {
+            this.EditFood.Name = foodName;
+            this.DataContext = this.EditFood;
+        }
+
         #region UserEvent
 
         public delegate void FoodCreatedEventHandler(object sender, FoodCreatedArgs e);
 
-        public static readonly RoutedEvent FoodCreatedEvent =
+        private static readonly RoutedEvent FoodCreatedEvent =
             //EventManager.RegisterRoutedEvent("FoodCreated", RoutingStrategy.Bubble, typeof(FoodCreatedEventHandler),
             EventManager.RegisterRoutedEvent(nameof(FoodCreated), RoutingStrategy.Bubble, typeof(FoodCreatedEventHandler),
                 typeof(FoodAddWindow));
