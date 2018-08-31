@@ -34,9 +34,6 @@ namespace _20180319Sample
 
             this.EditFood = new Food(foodName, ima, 0, boughtDate, limitDate);
             this.DataContext = this.EditFood;
-
-            //this.BoughtDate.SelectedDate = DateTime.Today;
-            //this.LimitDate.SelectedDate = DateTime.Today.AddDays(7);
         }
 
         #region UserEvent
@@ -44,7 +41,6 @@ namespace _20180319Sample
         public delegate void FoodCreatedEventHandler(object sender, FoodCreatedArgs e);
 
         public static readonly RoutedEvent FoodCreatedEvent =
-            //EventManager.RegisterRoutedEvent("FoodCreated", RoutingStrategy.Bubble, typeof(FoodCreatedEventHandler),
             EventManager.RegisterRoutedEvent(nameof(FoodCreated), RoutingStrategy.Bubble, typeof(FoodCreatedEventHandler),
                 typeof(FoodAddWindow));
 
@@ -64,7 +60,6 @@ namespace _20180319Sample
         /// <param name="e"></param>
         private void Icon_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //MessageBox.Show(Properties.Resources.notImplementMessage);
             var window = new FoodIconSelectWindow();
             window.ShowDialog();
             var img = window.SelectedImage;
@@ -82,9 +77,6 @@ namespace _20180319Sample
         private void OkButton_OnClick(object sender, RoutedEventArgs e)
         {
             //// ここで食材を送る処理を追加
-            //string foodName = this.FoodName.Text;
-            //BitmapImage ima = this.FoodImage.Source;
-            //ImageSource ima = this.FoodImage.Source;
             DateTime? boughtDateSelectedDate = this.BoughtDate.SelectedDate;
             DateTime boughtDate;
             if (boughtDateSelectedDate != null)
@@ -114,18 +106,15 @@ namespace _20180319Sample
                 MessageBox.Show(Properties.Resources.dateRelationWrong);
             }
 
-            //BitmapImage toImage = ima.;
             System.Windows.Controls.Image img = this.FoodImage;
             BitmapImage bi = new BitmapImage(new Uri(img.Source.ToString(), UriKind.Absolute));
             string foodName = this.FoodName.Text;
 
             var food = new Food(foodName, bi, 0, boughtDate, limitDate);
 
-            //var args = new FoodCreatedArgs(FoodAddWindow.FoodCreatedEvent, this.EditFood);
             var args = new FoodCreatedArgs(FoodAddWindow.FoodCreatedEvent, food);
             RaiseEvent(args);
 
-            //this.Dispatcher.InvokeShutdown();
             this.Close();
         }
 
@@ -136,11 +125,13 @@ namespace _20180319Sample
         /// <param name="e"></param>
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //this.DispatcheRoutedEventr.InvokeShutdown();
             this.Close();
         }
     }
 
+    /// <summary>
+    /// OKボタンがクリックされたときのイベントです.
+    /// </summary>
     public class FoodCreatedArgs : RoutedEventArgs
     {
         public Food FoodInfo { get; set; }
